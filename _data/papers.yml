@@ -1,0 +1,27 @@
+# ============================================================
+# PAPERS & PREPRINTS  (curated, manually maintained — do NOT scrape)
+# ------------------------------------------------------------
+# Chairs: add a paper by copying a block and editing it.
+#
+# Fields:
+#   type     : always "paper"   (drives the Latest feed + badge)
+#   title    : paper title
+#   authors  : "Surname, A., Surname, B."
+#   year     : publication / preprint year
+#   date     : YYYY-MM-DD  (used for ordering; "" for templates.
+#              If you only know the year, use YYYY-01-01.)
+#   venue    : journal, conference, or preprint server
+#   link     : DOI / arXiv / publisher URL
+#   note     : one-line note on why it is relevant
+#   template : true  -> shows as "Example — replace me"
+# ============================================================
+
+- type: paper
+  title: "Example paper or preprint — replace me"
+  authors: "Surname, A., Surname, B."
+  year: ""
+  date: ""
+  venue: "Journal or preprint server"
+  link: ""
+  note: "Replace with a curated paper: a short note on its relevance to AI in survey research."
+  template: true

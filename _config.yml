@@ -1,0 +1,66 @@
+# ============================================================
+# ESRA AI-SIG — Jekyll configuration
+# ============================================================
+
+# --- Site identity (used in <title>, meta, Open Graph) ---
+title: "ESRA AI-SIG"
+tagline: "Artificial Intelligence in Survey Research"
+description: >-
+  The Artificial Intelligence Special Interest Group (AI-SIG) of the European
+  Survey Research Association — a forum for researchers and practitioners
+  applying AI and machine learning to survey research.
+
+# ============================================================
+# URL / BASEURL  —  READ THIS BEFORE DEPLOYING
+# ============================================================
+# This site is configured for a GitHub Pages *project* page served at:
+#     https://<username>.github.io/<REPO-NAME>/
+#
+# Set `url` to https://<username>.github.io   (no trailing slash, no repo)
+# Set `baseurl` to /<REPO-NAME>               (leading slash, no trailing slash)
+#
+# Current default: repo "esrasig" owned by "pamato" served at
+# pamato.github.io/esrasig. Change these if the repository owner/name changes.
+#
+# If you later attach a custom domain (e.g. ai-sig.org), set:
+#     url: "https://ai-sig.org"
+#     baseurl: ""
+# and add a CNAME file. ALWAYS reference assets/links with the Liquid
+# filters `relative_url` / `absolute_url` (this site already does) so the
+# baseurl is applied automatically.
+url: "https://pamato.github.io"
+baseurl: "/esrasig"
+
+# --- Social / sharing placeholder image (optional) ---
+# Drop a 1200x630 PNG at assets/img/og-card.png to customise link previews.
+og_image: "/assets/img/esra-logo.png"
+
+# ============================================================
+# Get-involved endpoints  —  REPLACE THESE PLACEHOLDERS
+# ============================================================
+# mailing_list_url : the subscribe link from your mailing-list provider.
+#                    Leave blank until chosen; the site will show a safe fallback.
+# suggestion_form_action : the POST endpoint for the suggestion form. GitHub
+#                    Pages cannot process form submissions itself, so use a
+#                    third-party form service such as Formspree.
+mailing_list_url: ""
+suggestion_form_action: ""
+suggestion_email: "pamato@essex.ac.uk"
+
+# --- Build settings ---
+permalink: pretty
+markdown: kramdown
+sass:
+  style: compressed
+
+# Native GitHub Pages plugins only (no custom plugins — they will not run
+# on the Pages build). jekyll-sitemap generates /sitemap.xml automatically.
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - prototype/

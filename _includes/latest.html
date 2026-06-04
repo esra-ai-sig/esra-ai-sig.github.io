@@ -1,0 +1,32 @@
+{%- comment -%}
+  Latest feed — AUTOMATICALLY generated from the three data files.
+  Merges resources + papers + events, sorts by `date` (newest first),
+  and shows the most recent N. Nothing here is hardcoded: edit the
+  _data/*.yml files and this list updates on the next build.
+  Optional: pass a limit, e.g. {% include latest.html limit=4 %}
+{%- endcomment -%}
+{%- assign n = include.limit | default: 5 -%}
+{%- assign feed = site.data.resources | concat: site.data.papers | concat: site.data.events -%}
+{%- assign feed = feed | sort: "date" | reverse -%}
+<div class="feed">
+  {%- for item in feed limit: n -%}
+  <div class="feed-item">
+    <span class="date">{% if item.date and item.date != "" %}{{ item.date | date: "%Y" }}{% else %}&mdash;&nbsp;&mdash;{% endif %}</span>
+    <div>
+      <p class="fi-title">
+        {%- if item.link and item.link != "" -%}
+          <a href="{{ item.link }}"{% if item.link contains '://' %} rel="noopener"{% endif %}>{{ item.title }}</a>
+        {%- else -%}
+          {{ item.title }}
+        {%- endif -%}
+      </p>
+      {%- if item.note and item.note != "" -%}<p class="fi-note">{{ item.note }}</p>{%- endif -%}
+    </div>
+    {%- if item.template -%}
+      <span class="tag template">Template</span>
+    {%- else -%}
+      <span class="tag {{ item.type }}">{{ item.type | capitalize }}</span>
+    {%- endif -%}
+  </div>
+  {%- endfor -%}
+</div>

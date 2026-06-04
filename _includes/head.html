@@ -1,0 +1,26 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{%- comment -%} Per-page title + description, with sensible site-wide fallbacks {%- endcomment -%}
+{%- if page.url == "/" -%}
+  {%- assign page_title = site.title | append: " — " | append: site.tagline -%}
+{%- else -%}
+  {%- assign page_title = page.title | append: " — " | append: site.title -%}
+{%- endif -%}
+{%- assign page_desc = page.description | default: site.description | strip_newlines | strip -%}
+
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_desc }}" />
+<link rel="canonical" href="{{ page.url | absolute_url }}" />
+
+{%- comment -%} Open Graph — clean link previews in email / Slack {%- endcomment -%}
+<meta property="og:title" content="{{ page_title }}" />
+<meta property="og:description" content="{{ page_desc }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ page.url | absolute_url }}" />
+<meta property="og:image" content="{{ site.og_image | absolute_url }}" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />

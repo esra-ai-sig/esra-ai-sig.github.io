@@ -1,0 +1,69 @@
+---
+layout: page
+title: About
+eyebrow: About the SIG
+heading: About the AI Special Interest Group
+lede: Who we are, the scope we convene around, and the activities we run.
+description: >-
+  About the ESRA AI-SIG — scope, topics, planned activities, and the group's chairs.
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="mission">
+      <p class="big">The Artificial Intelligence Special Interest Group (AI&#8209;SIG) brings together researchers and practitioners interested in applying <span class="hl">artificial intelligence and machine learning</span> &mdash; including large language models, natural language processing, and deep learning &mdash; to any aspect of survey research, from questionnaire design and data collection to processing, analysis, and dissemination. The AI&#8209;SIG is a forum for sharing developments within the fast-moving field of AI and for fostering ideas and collaborations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Scope</p>
+      <h2>Topics in focus</h2>
+      <p>The group's interests span the full survey lifecycle, alongside the ethical and legal questions that frame the use of AI in research.</p>
+    </div>
+    <div class="topics">
+      {%- for topic in site.data.topics -%}
+      <div class="topic">
+        <span class="num">{% assign n = forloop.index %}{% if n < 10 %}0{% endif %}{{ n }}</span>
+        <p>{{ topic }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="prose">
+      <p class="eyebrow">Activities</p>
+      <h2>Planned activities</h2>
+      <p>The SIG runs a regular, maintainable programme:</p>
+      <ul>
+        <li><strong>Webinars</strong> &mdash; four per year, online and open to the mailing list.</li>
+        <li><strong>Symposia &amp; panels</strong> &mdash; at least one per year at ESRA or a related conference.</li>
+        <li><strong>Short courses</strong> &mdash; one per year, online or hosted at a chair's institution or a conference.</li>
+      </ul>
+      <p>See the <a href="{{ '/activities/' | relative_url }}">activities programme</a> for scheduled events.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Chairs</p>
+      <h2>Who runs the SIG</h2>
+    </div>
+    <div class="chairs">
+      {%- for chair in site.data.chairs -%}
+      <div class="chair">
+        <b>{{ chair.name }}</b>
+        <p class="inst">{{ chair.institution }}</p>
+        <a href="mailto:{{ chair.email }}">{{ chair.email }}</a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+layout: page
+title: Papers
+eyebrow: Papers &amp; preprints
+heading: Papers &amp; preprints
+lede: A curated, manually maintained reading list on AI and machine learning in survey research. We do not scrape &mdash; entries are chosen by the chairs.
+description: >-
+  A curated list of papers and preprints on artificial intelligence and machine
+  learning in survey research.
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="callout">
+      <span class="co-mark">// maintainers</span>
+      <p>This list is curated in <code>_data/papers.yml</code>. Add a paper by copying a block in that file. Entries marked <em>Template</em> are placeholders to replace.</p>
+    </div>
+
+    <div class="list-head">
+      <h2>Reading list</h2>
+      <span class="count">{{ site.data.papers | size }} {% if site.data.papers.size == 1 %}entry{% else %}entries{% endif %}</span>
+    </div>
+
+    {%- assign papers = site.data.papers | sort: "date" | reverse -%}
+    <div class="item-list">
+      {%- for p in papers -%}
+      <div class="item">
+        <div class="i-main">
+          <h3>
+            {%- if p.link and p.link != "" -%}<a href="{{ p.link }}" rel="noopener">{{ p.title }}</a>{%- else -%}{{ p.title }}{%- endif -%}
+          </h3>
+          <p class="i-meta">
+            {%- if p.authors and p.authors != "" -%}{{ p.authors }}{%- endif -%}
+            {%- if p.year and p.year != "" %} &middot; {{ p.year }}{% endif -%}
+            {%- if p.venue and p.venue != "" %} &middot; {{ p.venue }}{% endif -%}
+          </p>
+          {%- if p.note and p.note != "" -%}<p class="i-note">{{ p.note }}</p>{%- endif -%}
+        </div>
+        <div class="i-aside">
+          {%- if p.template -%}<span class="tag template">Template</span>{%- else -%}<span class="tag paper">Paper</span>{%- endif -%}
+          {%- if p.link and p.link != "" -%}<p class="i-link"><a href="{{ p.link }}" rel="noopener">Open&nbsp;&rarr;</a></p>{%- endif -%}
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

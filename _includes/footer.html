@@ -1,0 +1,37 @@
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <img class="logo" src="{{ '/assets/img/esra-logo.png' | relative_url }}" alt="ESRA" width="80" height="30" />
+          <span class="brand-div" aria-hidden="true"></span>
+          <span class="wordmark">
+            <b>AI&#8209;SIG</b>
+            <small>Special Interest Group</small>
+          </span>
+        </a>
+        <p class="foot-blurb">The Artificial Intelligence Special Interest Group of the European Survey Research Association.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Site</h4>
+        <ul>
+          {%- for item in site.data.navigation -%}
+            {%- unless item.cta -%}<li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>{%- endunless -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="{{ '/join/' | relative_url }}">Join the mailing list</a></li>
+          <li><a href="{{ '/join/#suggest' | relative_url }}">Suggest a resource</a></li>
+          <li><a href="mailto:{{ site.data.chairs[0].email }}">Contact the chairs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; {{ 'now' | date: "%Y" }} ESRA AI-SIG</span>
+      <span>European Survey Research Association</span>
+    </div>
+  </div>
+</footer>

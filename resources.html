@@ -1,0 +1,63 @@
+---
+layout: page
+title: Resources
+eyebrow: Resources
+heading: Curated resources on AI in survey research
+lede: Guidance, organisations, datasets and tools, and methods resources &mdash; maintained by the chairs through a single data file. Suggestions are welcome.
+description: >-
+  Curated resources on artificial intelligence in survey research — guidance and
+  reports, organisations, datasets and tools, and methods resources.
+sections:
+  - id: guidance
+    label: Guidance &amp; reports
+  - id: organisations
+    label: Organisations
+  - id: datasets
+    label: Datasets &amp; tools
+  - id: methods
+    label: Methods resources
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="callout">
+      <span class="co-mark">// maintainers</span>
+      <p>Every resource below comes from <code>_data/resources.yml</code>, grouped by its <code>section</code> field. Adding one is a few lines of text &mdash; no code. Entries marked <em>Template</em> are placeholders to replace.</p>
+    </div>
+
+    {%- for sec in page.sections -%}
+    {%- assign items = site.data.resources | where: "section", sec.id -%}
+    {%- if items.size > 0 -%}
+    <div class="list-head" style="margin-top:8px">
+      <h2 id="{{ sec.id }}">{{ sec.label }}</h2>
+      <span class="count">{{ items | size }} {% if items.size == 1 %}entry{% else %}entries{% endif %}</span>
+    </div>
+    <div class="item-list" style="margin-bottom:48px">
+      {%- for r in items -%}
+      <div class="item">
+        <div class="i-main">
+          <h3>
+            {%- if r.link and r.link != "" -%}<a href="{{ r.link }}" rel="noopener">{{ r.title }}</a>{%- else -%}{{ r.title }}{%- endif -%}
+          </h3>
+          <p class="i-meta">
+            {%- if r.org and r.org != "" -%}{{ r.org }}{%- else -%}Resource{%- endif -%}
+            {%- if r.year and r.year != "" %} &middot; {{ r.year }}{% elsif r.date and r.date != "" %} &middot; {{ r.date | date: "%Y" }}{% endif -%}
+          </p>
+          {%- if r.note and r.note != "" -%}<p class="i-note">{{ r.note }}</p>{%- endif -%}
+        </div>
+        <div class="i-aside">
+          {%- if r.template -%}<span class="tag template">Template</span>{%- endif -%}
+          {%- if r.link and r.link != "" -%}<p class="i-link"><a href="{{ r.link }}" rel="noopener">Open&nbsp;&rarr;</a></p>{%- endif -%}
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+    {%- endfor -%}
+
+    <div class="callout" style="margin-top:8px">
+      <span class="co-mark">// contribute</span>
+      <p>Know something that belongs here? <a href="{{ '/join/#suggest' | relative_url }}">Suggest a resource</a> and the chairs will review it.</p>
+    </div>
+  </div>
+</section>

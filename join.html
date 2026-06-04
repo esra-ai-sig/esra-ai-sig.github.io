@@ -1,0 +1,107 @@
+---
+layout: page
+title: Join
+eyebrow: Join &amp; contact
+heading: Join the SIG and get involved
+lede: Subscribe to the mailing list for webinar invitations and group news, suggest a resource or topic, or contact the chairs directly.
+description: >-
+  Join the ESRA AI-SIG mailing list, suggest a resource or webinar topic, or
+  contact the chairs.
+---
+
+<section class="section" id="mailing-list">
+  <div class="wrap">
+    <div class="cta-strip">
+      <div class="cta-cell">
+        <p class="eyebrow">Mailing list</p>
+        <h3>Join the mailing list</h3>
+        <p>Webinar invitations, calls for resources, and group news. You can unsubscribe at any time through the mailing-list provider.</p>
+        {%- if site.mailing_list_url and site.mailing_list_url != "" -%}
+        <a class="btn btn-primary" href="{{ site.mailing_list_url }}">Join the mailing list <span class="arr">&rarr;</span></a>
+        {%- else -%}
+        <p class="pending">The mailing list signup link is not live yet. Until it is, email the chairs and we will add you manually.</p>
+        <a class="btn btn-primary" href="mailto:{{ site.suggestion_email }}?subject=ESRA%20AI-SIG%20mailing%20list">Email to join <span class="arr">&rarr;</span></a>
+        {%- endif -%}
+      </div>
+      <div class="cta-cell">
+        <p class="eyebrow">Contact</p>
+        <h3>Email the chairs</h3>
+        <p>Questions, collaboration ideas, or anything that doesn't fit the form? Reach the chairs directly &mdash; details are listed below.</p>
+        <a class="btn btn-ghost" href="#chairs">See chair contacts</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="suggest">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Suggestions</p>
+      <h2>Suggest a resource or webinar topic</h2>
+      <p>Propose a webinar topic, share a paper, or recommend a resource. The chairs review every submission.</p>
+    </div>
+
+    {%- if site.suggestion_form_action and site.suggestion_form_action != "" -%}
+    <form class="form-card" action="{{ site.suggestion_form_action }}" method="POST">
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="type">Suggestion type <span class="req">*</span></label>
+        <select id="type" name="suggestion_type" required>
+          <option value="" disabled selected>Choose one&hellip;</option>
+          <option value="Webinar topic">Webinar topic</option>
+          <option value="Resource">Resource</option>
+          <option value="Paper or preprint">Paper or preprint</option>
+          <option value="Dataset or tool">Dataset or tool</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="title">Title <span class="req">*</span></label>
+        <input type="text" id="title" name="title" placeholder="A short title for your suggestion" required />
+      </div>
+      <div class="field">
+        <label for="link">Link</label>
+        <input type="url" id="link" name="link" placeholder="https://" />
+      </div>
+      <div class="field">
+        <label for="description">Short description <span class="req">*</span></label>
+        <textarea id="description" name="description" placeholder="A sentence or two on what it is and why it's relevant." required></textarea>
+      </div>
+      <p class="form-note">Submissions are handled by a third-party form service &mdash; GitHub Pages cannot process forms itself. Your details are used only to review and follow up on your suggestion.</p>
+      <button type="submit" class="btn btn-primary">Send suggestion <span class="arr">&rarr;</span></button>
+    </form>
+    {%- else -%}
+    <div class="form-card">
+      <p class="pending">The suggestion form endpoint is not connected yet. Until it is, send suggestions by email and include the suggestion type, title, link, and a short description.</p>
+      <a class="btn btn-primary" href="mailto:{{ site.suggestion_email }}?subject=ESRA%20AI-SIG%20suggestion">Email a suggestion <span class="arr">&rarr;</span></a>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="section" id="chairs">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Contact</p>
+      <h2>The chairs</h2>
+    </div>
+    <div class="chairs">
+      {%- for chair in site.data.chairs -%}
+      <div class="chair">
+        <b>{{ chair.name }}</b>
+        <p class="inst">{{ chair.institution }}</p>
+        <a href="mailto:{{ chair.email }}">{{ chair.email }}</a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

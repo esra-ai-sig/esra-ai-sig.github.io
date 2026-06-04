@@ -1,0 +1,55 @@
+# ============================================================
+# RESOURCES  (guidance, organisations, datasets/tools, methods)
+# ------------------------------------------------------------
+# Chairs: add a resource by copying a block and editing it.
+# The `section` field decides which group it appears under on the
+# Resources page. Allowed sections (and their display order) are
+# set in resources.md: guidance, organisations, datasets, methods.
+#
+# Fields:
+#   type     : always "resource"   (drives the Latest feed + badge)
+#   section  : guidance | organisations | datasets | methods
+#   title    : resource title
+#   org      : publisher / author / host  (optional)
+#   date     : YYYY-MM-DD  (used for ordering; "" for templates)
+#   year     : display year (optional; falls back to date's year)
+#   link     : URL to the resource
+#   note     : one-line description
+#   template : true  -> shows as "Example — replace me"
+# ============================================================
+
+- type: resource
+  section: guidance
+  title: "Responsible AI Integration in Survey Research"
+  org: "AAPOR"
+  date: "2026-05-01"
+  year: 2026
+  link: "https://aapor.org/wp-content/uploads/2026/05/Responsible-AI-Integration-In-Survey-Research.pdf"
+  note: "A practitioner-facing report on integrating AI responsibly across the survey lifecycle — design, data collection, analysis, transparency, and ethics."
+
+- type: resource
+  section: organisations
+  title: "Example organisation — replace me"
+  org: ""
+  date: ""
+  link: ""
+  note: "A society, working group, or institute relevant to AI in survey research."
+  template: true
+
+- type: resource
+  section: datasets
+  title: "Example dataset or tool — replace me"
+  org: ""
+  date: ""
+  link: ""
+  note: "An open dataset, benchmark, or software tool useful to the community."
+  template: true
+
+- type: resource
+  section: methods
+  title: "Example methods resource — replace me"
+  org: ""
+  date: ""
+  link: ""
+  note: "A tutorial, course, or paper that helps people apply a method well."
+  template: true

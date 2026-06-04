@@ -1,0 +1,129 @@
+---
+layout: default
+title: Home
+description: >-
+  The ESRA Artificial Intelligence Special Interest Group (AI-SIG) — a forum for
+  researchers and practitioners applying AI and machine learning to survey research.
+---
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">ESRA Special Interest Group</p>
+        <h1>Artificial Intelligence in <em>Survey Research</em></h1>
+        <p class="lede">A forum for researchers and practitioners applying AI and machine learning &mdash; including large language models, NLP, and deep learning &mdash; across every stage of the survey lifecycle.</p>
+        <div class="hero-ctas">
+          {%- if site.mailing_list_url and site.mailing_list_url != "" -%}
+          <a class="btn btn-primary" href="{{ site.mailing_list_url }}">Join the mailing list <span class="arr">&rarr;</span></a>
+          {%- else -%}
+          <a class="btn btn-primary" href="{{ '/join/#mailing-list' | relative_url }}">Join the mailing list <span class="arr">&rarr;</span></a>
+          {%- endif -%}
+          <a class="btn btn-ghost" href="{{ '/join/#suggest' | relative_url }}">Suggest a resource or topic</a>
+        </div>
+      </div>
+      <div>
+        <div class="motif" role="img" aria-label="Abstract diagram connecting survey data points through a model">
+          <span class="node n1"></span><span class="node n2"></span><span class="node n3"></span>
+        </div>
+        <p class="motif-cap">// from responses to inference</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="about">
+  <div class="wrap">
+    <div class="mission">
+      <p class="eyebrow">About the group</p>
+      <p class="big">The Artificial Intelligence Special Interest Group (AI&#8209;SIG) brings together researchers and practitioners interested in applying <span class="hl">artificial intelligence and machine learning</span> &mdash; including large language models, natural language processing, and deep learning &mdash; to any aspect of survey research, from questionnaire design and data collection to processing, analysis, and dissemination. The AI&#8209;SIG is a forum for sharing developments within the fast-moving field of AI and for fostering ideas and collaborations.</p>
+      <p style="margin-top:26px"><a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">Read more about the SIG <span class="arr">&rarr;</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="band stone">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Scope</p>
+      <h2>Topics in focus</h2>
+      <p>The breadth of work the group convenes around &mdash; spanning design, collection, analysis, and the ethics that frame them.</p>
+    </div>
+    <div class="topics">
+      {%- for topic in site.data.topics -%}
+      <div class="topic">
+        <span class="num">{% assign n = forloop.index %}{% if n < 10 %}0{% endif %}{{ n }}</span>
+        <p>{{ topic }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Activities</p>
+      <h2>What the group runs</h2>
+      <p>A regular programme of online and in-person activities, maintained by the chairs through simple data files.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="freq">4&times;</div>
+        <div class="cadence">per year</div>
+        <h3>Webinars</h3>
+        <p>Online talks on emerging methods, tools, and findings &mdash; open to the mailing list.</p>
+      </div>
+      <div class="card">
+        <div class="freq">1+&times;</div>
+        <div class="cadence">per year</div>
+        <h3>Symposia &amp; panels</h3>
+        <p>At least one session at ESRA or a related conference, bringing the community together in person.</p>
+      </div>
+      <div class="card">
+        <div class="freq">1&times;</div>
+        <div class="cadence">per year</div>
+        <h3>Short courses</h3>
+        <p>A hands-on course, online or hosted at a chair's institution or a conference.</p>
+      </div>
+    </div>
+    <p style="margin-top:28px"><a class="btn btn-ghost" href="{{ '/activities/' | relative_url }}">See the programme <span class="arr">&rarr;</span></a></p>
+  </div>
+</section>
+
+<section class="band stone">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Latest</p>
+      <h2>Recent resources, papers &amp; events</h2>
+      <p>Automatically drawn from the group's data files &mdash; this list updates whenever the chairs add an item.</p>
+    </div>
+    {% include latest.html limit=5 %}
+    <div class="feed-more">
+      <a class="btn btn-ghost" href="{{ '/resources/' | relative_url }}">Browse all resources <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="cta-strip">
+      <div class="cta-cell">
+        <p class="eyebrow">Stay in the loop</p>
+        <h3>Join the mailing list</h3>
+        <p>Webinar invitations, calls for resources, and group news. Unsubscribe any time through the mailing-list provider.</p>
+        {%- if site.mailing_list_url and site.mailing_list_url != "" -%}
+        <a class="btn btn-primary" href="{{ site.mailing_list_url }}">Join the mailing list <span class="arr">&rarr;</span></a>
+        {%- else -%}
+        <a class="btn btn-primary" href="{{ '/join/#mailing-list' | relative_url }}">Mailing list setup <span class="arr">&rarr;</span></a>
+        {%- endif -%}
+      </div>
+      <div class="cta-cell">
+        <p class="eyebrow">Shape the programme</p>
+        <h3>Suggest a resource or topic</h3>
+        <p>Propose a webinar topic, share a paper, or recommend a resource for the community.</p>
+        <a class="btn btn-ghost" href="{{ '/join/#suggest' | relative_url }}">Send a suggestion</a>
+      </div>
+    </div>
+  </div>
+</section>

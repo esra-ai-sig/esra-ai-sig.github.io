@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+{% include header.html %}
+<main id="main">
+{{ content }}
+</main>
+{% include footer.html %}
+<script>
+  // Mobile nav toggle (the site's only JavaScript).
+  (function () {
+    var t = document.querySelector('.nav-toggle');
+    var m = document.getElementById('primary-nav');
+    if (!t || !m) return;
+    t.addEventListener('click', function () {
+      var open = m.classList.toggle('open');
+      t.setAttribute('aria-expanded', String(open));
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# ============================================================
+# Chairs — name, institution, email only.
+# Add or remove an entry by editing this list.
+# ============================================================
+- name: Liam Wright
+  institution: University College London
+  email: liam.wright@ucl.ac.uk
+- name: David Bann
+  institution: University College London
+  email: david.bann@ucl.ac.uk
+- name: Paulo Serodio
+  institution: University of Essex
+  email: pamato@essex.ac.uk
+- name: Gabi Durrant
+  institution: University of Southampton
+  email: g.durrant@soton.ac.uk

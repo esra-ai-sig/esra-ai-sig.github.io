@@ -1,0 +1,54 @@
+# ============================================================
+# EVENTS  (webinars, symposia/panels, short courses)
+# ------------------------------------------------------------
+# Chairs: add an event by copying a block below and editing it.
+# Remove the `template: true` line once an entry is real — that
+# line is what shows the dashed "Template" badge and hides the
+# placeholder date.
+#
+# Fields:
+#   type      : always "event"        (drives the Latest feed + badge)
+#   kind      : webinar | symposium | course
+#   title     : event title
+#   date      : YYYY-MM-DD  (leave as "" for templates — do NOT
+#               invent a realistic date for a placeholder)
+#   status    : upcoming | past | template
+#   speaker   : optional
+#   location  : optional (e.g. "Online", "ESRA 2027, Utrecht")
+#   link      : optional registration / recording URL
+#   note      : one-line description
+#   template  : true  -> shows as "Example — replace me"
+# ============================================================
+
+- type: event
+  kind: webinar
+  title: "Example webinar — replace me"
+  date: ""
+  status: template
+  speaker: ""
+  location: "Online"
+  link: ""
+  note: "Replace with a real webinar: title, speaker, date, and a registration link."
+  template: true
+
+- type: event
+  kind: symposium
+  title: "Example symposium or panel — replace me"
+  date: ""
+  status: template
+  speaker: ""
+  location: "ESRA conference"
+  link: ""
+  note: "Replace with a session at ESRA or a related conference."
+  template: true
+
+- type: event
+  kind: course
+  title: "Example short course — replace me"
+  date: ""
+  status: template
+  speaker: ""
+  location: "Online or host institution"
+  link: ""
+  note: "Replace with a hands-on short course offered by the group."
+  template: true
