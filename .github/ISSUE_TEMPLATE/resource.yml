@@ -1,0 +1,45 @@
+name: Suggest a resource
+description: Suggest guidance, an organisation, a dataset/tool, or a methods resource.
+title: "[Resource]: "
+labels:
+  - content
+  - resource
+body:
+  - type: dropdown
+    id: section
+    attributes:
+      label: Resource type
+      options:
+        - Guidance or report
+        - Organisation
+        - Dataset or tool
+        - Methods resource
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: "Resource title"
+    validations:
+      required: true
+  - type: input
+    id: organisation
+    attributes:
+      label: Organisation, author, or host
+      placeholder: "AAPOR, ESRA, ..."
+  - type: input
+    id: link
+    attributes:
+      label: URL
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: Short description
+      description: One or two sentences on why this is useful for the SIG community.
+    validations:
+      required: true

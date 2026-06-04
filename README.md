@@ -107,6 +107,10 @@ Give co-chairs write access or ask them to fork the repository. The normal flow:
 
 For fuller contributor notes, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+Visitors can also suggest events, papers, and resources through GitHub issue
+forms. Those templates live in `.github/ISSUE_TEMPLATE/` and give maintainers a
+structured queue even before the public suggestion form endpoint is connected.
+
 ### Domain recommendation
 
 Use the free project URL for launch unless ESRA can provide a subdomain:

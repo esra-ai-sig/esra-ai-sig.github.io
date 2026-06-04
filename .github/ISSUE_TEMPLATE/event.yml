@@ -1,0 +1,48 @@
+name: Suggest an event
+description: Propose a webinar, symposium, panel, or short course for the SIG.
+title: "[Event]: "
+labels:
+  - content
+  - event
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Event type
+      options:
+        - Webinar
+        - Symposium or panel
+        - Short course
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Proposed title
+      placeholder: "Using LLMs to code open-ended survey responses"
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date or timing
+      description: Use YYYY-MM-DD if known, or a rough timing if not yet scheduled.
+      placeholder: "2027-03-12 or Spring 2027"
+  - type: input
+    id: speaker
+    attributes:
+      label: Speaker, organiser, or chair
+      placeholder: "Name, institution"
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      placeholder: "https://"
+  - type: textarea
+    id: note
+    attributes:
+      label: Short description
+      description: One or two sentences on the event and why it fits the SIG.
+    validations:
+      required: true

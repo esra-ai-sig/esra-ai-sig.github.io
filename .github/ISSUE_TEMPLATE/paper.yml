@@ -1,0 +1,45 @@
+name: Suggest a paper or preprint
+description: Suggest a paper for the curated AI in survey research reading list.
+title: "[Paper]: "
+labels:
+  - content
+  - paper
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: "Paper title"
+    validations:
+      required: true
+  - type: input
+    id: authors
+    attributes:
+      label: Authors
+      placeholder: "Surname, A., Surname, B."
+    validations:
+      required: true
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      placeholder: "2026"
+  - type: input
+    id: venue
+    attributes:
+      label: Venue or preprint server
+      placeholder: "Journal, conference, arXiv, SocArXiv, SSRN, ..."
+  - type: input
+    id: link
+    attributes:
+      label: DOI or URL
+      placeholder: "https://doi.org/..."
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: Why should this be included?
+      description: One or two sentences on relevance to AI, ML, or survey research.
+    validations:
+      required: true

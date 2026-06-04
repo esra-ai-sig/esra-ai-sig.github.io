@@ -14,6 +14,10 @@ one file under `_data/`.
 Copy an existing YAML block, paste it in the same file, and edit the values.
 Keep indentation exactly as it is.
 
+If you are suggesting content but do not want to edit YAML, open one of the
+GitHub issue forms for events, papers, or resources. A maintainer can convert
+the suggestion into a data-file edit.
+
 ## Pull request checklist
 
 - The entry has a working URL where relevant.
