@@ -4,6 +4,7 @@ _site/
 .jekyll-metadata
 Gemfile.lock
 .bundle/
+*.bundle
 .DS_Store
 .omx/
 prototype/
