@@ -13,16 +13,13 @@ description: >-
 # ============================================================
 # URL / BASEURL  —  READ THIS BEFORE DEPLOYING
 # ============================================================
-# This site is configured for a GitHub Pages *project* page served at:
-#     https://<username>.github.io/<REPO-NAME>/
+# This site is configured for a GitHub Pages organization site served at:
+#     https://esra-ai-sig.github.io/
 #
-# Set `url` to https://<username>.github.io   (no trailing slash, no repo)
-# Set `baseurl` to /<REPO-NAME>               (leading slash, no trailing slash)
+# Organization/user sites use a repository named <owner>.github.io and should
+# have an empty `baseurl`.
 #
-# Current default: repo "esrasig" owned by "pamato" served at
-# pamato.github.io/esrasig. Change these if the repository owner/name changes.
-#
-# If you later attach a custom domain (e.g. ai-sig.org), set:
+# If you later attach a custom domain (e.g. ai-surveys.esra.org), set:
 #     url: "https://ai-sig.org"
 #     baseurl: ""
 # and add a CNAME file. ALWAYS reference assets/links with the Liquid

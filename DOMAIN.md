@@ -2,10 +2,10 @@
 
 ## Recommended launch path
 
-Start with the free GitHub Pages project URL:
+Start with the free GitHub Pages organization URL:
 
 ```text
-https://pamato.github.io/esrasig/
+https://esra-ai-sig.github.io/
 ```
 
 This costs nothing to host, works from a public GitHub repository, and lets
