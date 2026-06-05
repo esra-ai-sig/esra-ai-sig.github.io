@@ -22,6 +22,16 @@
 
 - type: event
   kind: webinar
+  title: "Technical learnings from building AI into public surveys"
+  date: "2026-06-11"
+  status: upcoming
+  speaker: "Steve Gibbard (ONS)"
+  location: "Online"
+  link: "https://teams.microsoft.com/meet/31773388529921?p=zegj6AfWAu0G6OUOG9"
+  note: "A 12:00-13:00 online session on the architecture, challenges, and lessons from deploying AI-powered survey functionality in a public test environment."
+
+- type: event
+  kind: webinar
   title: "Example webinar — replace me"
   date: ""
   status: template
