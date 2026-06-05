@@ -28,8 +28,8 @@ description: >-
 # and add a CNAME file. ALWAYS reference assets/links with the Liquid
 # filters `relative_url` / `absolute_url` (this site already does) so the
 # baseurl is applied automatically.
-url: "https://pamato.github.io"
-baseurl: "/esrasig"
+url: "https://esra-ai-sig.github.io"
+baseurl: ""
 
 # --- Social / sharing placeholder image (optional) ---
 # Drop a 1200x630 PNG at assets/img/og-card.png to customise link previews.
