@@ -55,7 +55,7 @@ description: >-
           {%- if ev.note and ev.note != "" -%}<p class="i-note">{{ ev.note }}</p>{%- endif -%}
         </div>
         <div class="i-aside">
-          {%- if ev.template -%}<span class="tag template">Template</span>{%- else -%}<span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>{%- endif -%}
+          <span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>
         </div>
       </div>
       {%- endfor -%}

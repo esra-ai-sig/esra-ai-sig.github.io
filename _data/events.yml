@@ -2,23 +2,28 @@
 # EVENTS  (webinars, symposia/panels, short courses)
 # ------------------------------------------------------------
 # Chairs: add an event by copying a block below and editing it.
-# Remove the `template: true` line once an entry is real — that
-# line is what shows the dashed "Template" badge and hides the
-# placeholder date.
 #
 # Fields:
 #   type      : always "event"        (drives the Latest feed + badge)
 #   kind      : webinar | symposium | course
 #   title     : event title
-#   date      : YYYY-MM-DD  (leave as "" for templates — do NOT
-#               invent a realistic date for a placeholder)
-#   status    : upcoming | past | template
+#   date      : YYYY-MM-DD
+#   status    : upcoming | past
 #   speaker   : optional
 #   location  : optional (e.g. "Online", "ESRA 2027, Utrecht")
 #   link      : optional registration / recording URL
 #   note      : one-line description
-#   template  : true  -> shows as "Example — replace me"
 # ============================================================
+
+- type: event
+  kind: course
+  title: "AI for Survey Researchers: A three-workshop series"
+  date: "2026-06-08"
+  status: upcoming
+  speaker: "Dr Paulo Serôdio"
+  location: "Online"
+  link: "https://www.ncrm.ac.uk/training/show.php?article=14796"
+  note: "An NCRM online workshop series running on 8 June, 22 June, and 6 July 2026, covering LLMs, context engineering, API workflows, retrieval-augmented generation, agentic AI, and research transparency."
 
 - type: event
   kind: webinar
@@ -29,36 +34,3 @@
   location: "Online"
   link: "https://teams.microsoft.com/meet/31773388529921?p=zegj6AfWAu0G6OUOG9"
   note: "A 12:00-13:00 online session on the architecture, challenges, and lessons from deploying AI-powered survey functionality in a public test environment."
-
-- type: event
-  kind: webinar
-  title: "Example webinar — replace me"
-  date: ""
-  status: template
-  speaker: ""
-  location: "Online"
-  link: ""
-  note: "Replace with a real webinar: title, speaker, date, and a registration link."
-  template: true
-
-- type: event
-  kind: symposium
-  title: "Example symposium or panel — replace me"
-  date: ""
-  status: template
-  speaker: ""
-  location: "ESRA conference"
-  link: ""
-  note: "Replace with a session at ESRA or a related conference."
-  template: true
-
-- type: event
-  kind: course
-  title: "Example short course — replace me"
-  date: ""
-  status: template
-  speaker: ""
-  location: "Online or host institution"
-  link: ""
-  note: "Replace with a hands-on short course offered by the group."
-  template: true
