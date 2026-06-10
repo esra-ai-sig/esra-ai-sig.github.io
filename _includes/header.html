@@ -16,7 +16,7 @@
         {%- elsif item.url != "/" and page.url contains item.url -%}{%- assign cur = true -%}{%- endif -%}
         {%- if item.cta -%}
           {%- if site.mailing_list_url and site.mailing_list_url != "" -%}
-          <a class="nav-cta" href="{{ item.url | relative_url }}">Join the mailing list</a>
+          <a class="nav-cta" href="{{ site.mailing_list_url }}">Join the mailing list</a>
           {%- else -%}
           <a class="nav-cta" href="{{ item.url | relative_url }}">Get involved</a>
           {%- endif -%}

@@ -5,8 +5,8 @@ eyebrow: Join &amp; contact
 heading: Join the SIG and get involved
 lede: Subscribe to the mailing list for webinar invitations and group news, suggest a resource or topic, or contact the chairs directly.
 description: >-
-  Join the ESRA AI-SIG mailing list, suggest a resource or webinar topic, or
-  contact the chairs.
+  Join the ESRA AI-SIG JiscMail mailing list, suggest a resource or webinar
+  topic, or contact the chairs.
 ---
 
 <section class="section" id="mailing-list">
@@ -15,13 +15,9 @@ description: >-
       <div class="cta-cell">
         <p class="eyebrow">Mailing list</p>
         <h3>Join the mailing list</h3>
-        <p>Webinar invitations, calls for resources, and group news. You can unsubscribe at any time through the mailing-list provider.</p>
-        {%- if site.mailing_list_url and site.mailing_list_url != "" -%}
-        <a class="btn btn-primary" href="{{ site.mailing_list_url }}">Join the mailing list <span class="arr">&rarr;</span></a>
-        {%- else -%}
-        <p class="pending">The mailing list signup link is not live yet. Until it is, email the chairs and we will add you manually.</p>
-        <a class="btn btn-primary" href="mailto:{{ site.suggestion_email }}?subject=ESRA%20AI-SIG%20mailing%20list">Email to join <span class="arr">&rarr;</span></a>
-        {%- endif -%}
+        <p>Webinar invitations, calls for resources, and group news are sent through the ESRA-AI-SIG JiscMail list. JiscMail handles subscriptions, archives, and unsubscribe preferences.</p>
+        <a class="btn btn-primary" href="{{ site.mailing_list_url }}">Subscribe on JiscMail <span class="arr">&rarr;</span></a>
+        <p class="form-note">Subscribers can post to <a href="mailto:ESRA-AI-SIG@jiscmail.ac.uk">ESRA-AI-SIG@jiscmail.ac.uk</a>. For list-owner help, email <a href="mailto:ESRA-AI-SIG-request@jiscmail.ac.uk">ESRA-AI-SIG-request@jiscmail.ac.uk</a>.</p>
       </div>
       <div class="cta-cell">
         <p class="eyebrow">Contact</p>

@@ -23,7 +23,11 @@
       <div class="foot-col">
         <h4>Get involved</h4>
         <ul>
+          {%- if site.mailing_list_url and site.mailing_list_url != "" -%}
+          <li><a href="{{ site.mailing_list_url }}">Join the mailing list</a></li>
+          {%- else -%}
           <li><a href="{{ '/join/' | relative_url }}">Join the mailing list</a></li>
+          {%- endif -%}
           <li><a href="{{ '/join/#suggest' | relative_url }}">Suggest a resource</a></li>
           <li><a href="mailto:{{ site.data.chairs[0].email }}">Contact the chairs</a></li>
         </ul>
