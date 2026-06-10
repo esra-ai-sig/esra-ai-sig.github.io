@@ -35,12 +35,12 @@ og_image: "/assets/img/esra-logo.png"
 # ============================================================
 # Get-involved endpoints  —  REPLACE THESE PLACEHOLDERS
 # ============================================================
-# mailing_list_url : the public JiscMail list page. Visitors subscribe there so
-#                    JiscMail handles subscriber data and preferences.
+# mailing_list_url : the public JiscMail subscription page. Visitors subscribe
+#                    there so JiscMail handles subscriber data and preferences.
 # suggestion_form_action : the POST endpoint for the suggestion form. GitHub
 #                    Pages cannot process form submissions itself, so use a
 #                    third-party form service such as Formspree.
-mailing_list_url: "https://www.jiscmail.ac.uk/ESRA-AI-SIG"
+mailing_list_url: "https://www.jiscmail.ac.uk/cgi-bin/wa-jisc.exe?SUBED1=ESRA-AI-SIG&A=1"
 suggestion_form_action: ""
 suggestion_email: "pamato@essex.ac.uk"
 
