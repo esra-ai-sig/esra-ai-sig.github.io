@@ -11,6 +11,10 @@
 #   date     : YYYY-MM-DD  (used for ordering; "" for templates.
 #              If you only know the year, use YYYY-01-01.)
 #   venue    : journal, conference, or preprint server
+#   source   : optional source label (e.g., "Working paper", "Publisher page")
+#   doi      : optional DOI string (without https://doi.org/)
+#   tags     : optional comma-separated keywords for filtering
+#   kind     : optional label for badge (e.g., "paper", "preprint")
 #   link     : DOI / arXiv / publisher URL
 #   note     : one-line note on why it is relevant
 #   template : true  -> shows as "Example — replace me"

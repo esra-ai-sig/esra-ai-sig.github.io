@@ -36,22 +36,33 @@ description: >-
 
 <section class="section">
   <div class="wrap">
+    {%- assign events = site.data.events | sort: "date" -%}
+    {%- assign latest_event = events | last -%}
+    {%- assign upcoming = events | where: "status", "upcoming" -%}
+    {%- assign past = events | where_exp: "ev", "ev.status != 'upcoming'" | reverse -%}
     <div class="list-head">
-      <h2>Scheduled events</h2>
-      <span class="count">{{ site.data.events | size }} listed</span>
+      <h2>Upcoming events</h2>
+      <span class="count">{{ upcoming | size }} listed</span>
+      {%- if latest_event and latest_event.date and latest_event.date != "" -%}
+      <span class="count">Last updated {{ latest_event.date | date: "%-d %b %Y" }}</span>
+      {%- endif -%}
     </div>
+    <p class="list-note">Event times and time zones are shown on each event page or registration link.</p>
 
-    {%- assign events = site.data.events | sort: "date" | reverse -%}
     <div class="item-list">
-      {%- for ev in events -%}
+      {%- if upcoming.size == 0 -%}
+      <p class="empty-note">No upcoming events are listed yet.</p>
+      {%- endif -%}
+      {%- for ev in upcoming -%}
       <div class="item">
         <div class="i-main">
           <h3>
             {%- if ev.link and ev.link != "" -%}<a href="{{ ev.link }}" rel="noopener">{{ ev.title }}</a>{%- else -%}{{ ev.title }}{%- endif -%}
           </h3>
           <p class="i-meta">
-            {{ ev.kind | capitalize }}{% if ev.location and ev.location != "" %} &middot; {{ ev.location }}{% endif %}{% if ev.date and ev.date != "" %} &middot; {{ ev.date | date: "%-d %B %Y" }}{% else %} &middot; date to be announced{% endif %}{% if ev.speaker and ev.speaker != "" %} &middot; {{ ev.speaker }}{% endif %}
+            {{ ev.kind | capitalize }}{% if ev.location and ev.location != "" %} &middot; {{ ev.location }}{% endif %}{% if ev.date and ev.date != "" %} &middot; {{ ev.date | date: "%-d %B %Y" }}{% else %} &middot; date to be announced{% endif %}{% if ev.speaker and ev.speaker != "" %} &middot; {{ ev.speaker }}{% endif %}{% if ev.source and ev.source != "" %} &middot; {{ ev.source }}{% endif %}
           </p>
+          {%- if ev.tags and ev.tags != "" -%}<p class="i-tags">{{ ev.tags }}</p>{%- endif -%}
           {%- if ev.note and ev.note != "" -%}<p class="i-note">{{ ev.note }}</p>{%- endif -%}
         </div>
         <div class="i-aside">
@@ -62,3 +73,63 @@ description: >-
     </div>
   </div>
 </section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="list-head">
+      <h2>Past events</h2>
+      <span class="count">{{ past | size }} listed</span>
+    </div>
+    <div class="item-list">
+      {%- if past.size == 0 -%}
+      <p class="empty-note">Past events will appear here after they run.</p>
+      {%- endif -%}
+      {%- for ev in past -%}
+      <div class="item">
+        <div class="i-main">
+          <h3>
+            {%- if ev.link and ev.link != "" -%}<a href="{{ ev.link }}" rel="noopener">{{ ev.title }}</a>{%- else -%}{{ ev.title }}{%- endif -%}
+          </h3>
+          <p class="i-meta">
+            {{ ev.kind | capitalize }}{% if ev.location and ev.location != "" %} &middot; {{ ev.location }}{% endif %}{% if ev.date and ev.date != "" %} &middot; {{ ev.date | date: "%-d %B %Y" }}{% else %} &middot; date to be announced{% endif %}{% if ev.speaker and ev.speaker != "" %} &middot; {{ ev.speaker }}{% endif %}{% if ev.source and ev.source != "" %} &middot; {{ ev.source }}{% endif %}
+          </p>
+          {%- if ev.tags and ev.tags != "" -%}<p class="i-tags">{{ ev.tags }}</p>{%- endif -%}
+          {%- if ev.note and ev.note != "" -%}<p class="i-note">{{ ev.note }}</p>{%- endif -%}
+        </div>
+        <div class="i-aside">
+          <span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- assign ld_events = site.data.events | where_exp: "ev", "ev.link and ev.link != '' and ev.date and ev.date != ''" -%}
+{%- if ld_events.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {%- for ev in ld_events -%}
+    {
+      "@type": "Event",
+      "name": {{ ev.title | jsonify }},
+      "startDate": {{ ev.date | jsonify }},
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "eventStatus": "https://schema.org/{% if ev.status == 'upcoming' %}EventScheduled{% else %}EventCompleted{% endif %}",
+      "location": {
+        "@type": "Place",
+        "name": {{ ev.location | default: "Online" | jsonify }}
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "ESRA AI-SIG"
+      },
+      "url": {{ ev.link | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
