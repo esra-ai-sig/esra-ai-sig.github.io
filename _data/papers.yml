@@ -17,7 +17,7 @@
 #   kind     : optional label for badge (e.g., "paper", "preprint")
 #   link     : DOI / arXiv / publisher URL
 #   note     : one-line note on why it is relevant
-#   template : true  -> shows as "Example — replace me"
+#   template : true  -> hidden from public pages
 # ============================================================
 
 - type: paper

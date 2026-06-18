@@ -11,11 +11,6 @@ description: >-
 
 <section class="section">
   <div class="wrap">
-    <div class="callout">
-      <span class="co-mark">// maintainers</span>
-      <p>This list is curated in <code>_data/papers.yml</code>. Add a paper by copying a block in that file. Entries marked <em>Template</em> stay hidden from visitors until replaced.</p>
-    </div>
-
     {%- assign papers = site.data.papers | where_exp: "p", "p.template != true" | sort: "date" | reverse -%}
     {%- assign paper_years = papers | map: "year" | compact | uniq | sort | reverse -%}
     {%- assign latest_paper = papers | first -%}
