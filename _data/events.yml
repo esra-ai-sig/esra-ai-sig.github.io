@@ -12,6 +12,8 @@
 #   speaker   : optional
 #   location  : optional (e.g. "Online", "ESRA 2027, Utrecht")
 #   link      : optional registration / recording URL
+#   source    : optional source label (e.g., "NCRM", "ESRA")
+#   tags      : optional comma-separated keywords
 #   note      : one-line description
 # ============================================================
 

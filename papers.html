@@ -11,20 +11,51 @@ description: >-
 
 <section class="section">
   <div class="wrap">
-    <div class="callout">
-      <span class="co-mark">// maintainers</span>
-      <p>This list is curated in <code>_data/papers.yml</code>. Add a paper by copying a block in that file. Entries marked <em>Template</em> are placeholders to replace.</p>
+    {%- assign papers = site.data.papers | where_exp: "p", "p.template != true" | sort: "date" | reverse -%}
+    {%- assign paper_years = papers | map: "year" | compact | uniq | sort | reverse -%}
+    {%- assign latest_paper = papers | first -%}
+
+    {%- if papers.size > 0 -%}
+    <div class="filter-controls" data-filter-root>
+      <label class="sr-only" for="paper-search">Search papers</label>
+      <input id="paper-search" type="search" placeholder="Search title, author, note..." data-filter-input />
+      <label class="sr-only" for="paper-type">Filter papers by type</label>
+      <select id="paper-type" data-filter-type>
+        <option value="">All types</option>
+        {%- assign paper_types = papers | map: "kind" | compact | uniq | sort -%}
+        <option value="paper">Paper</option>
+        {%- for t in paper_types -%}
+          {%- assign tv = t | downcase -%}
+          {%- unless tv == "paper" -%}<option value="{{ tv | escape }}">{{ t | capitalize | escape }}</option>{%- endunless -%}
+        {%- endfor -%}
+      </select>
+      <label class="sr-only" for="paper-year">Filter papers by year</label>
+      <select id="paper-year" data-filter-year>
+        <option value="">All years</option>
+        {%- for y in paper_years -%}<option value="{{ y | downcase | escape }}">{{ y | escape }}</option>{%- endfor -%}
+      </select>
+      <button class="btn btn-ghost" type="button" data-filter-clear>Clear</button>
     </div>
+    {%- endif -%}
 
     <div class="list-head">
       <h2>Reading list</h2>
-      <span class="count">{{ site.data.papers | size }} {% if site.data.papers.size == 1 %}entry{% else %}entries{% endif %}</span>
+      <span class="count" data-filter-count>{{ papers | size }} {% if papers.size == 1 %}entry{% else %}entries{% endif %}</span>
+      {%- if latest_paper and latest_paper.date and latest_paper.date != "" -%}
+      <span class="count">Last updated {{ latest_paper.date | date: "%-d %b %Y" }}</span>
+      {%- endif -%}
     </div>
 
-    {%- assign papers = site.data.papers | sort: "date" | reverse -%}
-    <div class="item-list">
+    <div class="item-list" data-filter-scope="papers">
+      {%- if papers.size == 0 -%}
+      <p class="empty-note">No papers are listed yet.</p>
+      {%- else -%}
       {%- for p in papers -%}
-      <div class="item">
+      {%- assign paper_filter_year = p.year -%}
+      {%- if paper_filter_year == nil or paper_filter_year == "" -%}
+        {%- if p.date and p.date != "" -%}{%- assign paper_filter_year = p.date | date: "%Y" -%}{%- endif -%}
+      {%- endif -%}
+      <div class="item" data-filter-item data-type="{{ p.kind | default: 'paper' | downcase | escape }}" data-year="{{ paper_filter_year | default: '' | downcase | escape }}" data-search="{{ p.title | append: ' ' | append: p.authors | append: ' ' | append: p.venue | append: ' ' | append: p.note | append: ' ' | append: p.tags | downcase | escape }}">
         <div class="i-main">
           <h3>
             {%- if p.link and p.link != "" -%}<a href="{{ p.link }}" rel="noopener">{{ p.title }}</a>{%- else -%}{{ p.title }}{%- endif -%}
@@ -33,15 +64,86 @@ description: >-
             {%- if p.authors and p.authors != "" -%}{{ p.authors }}{%- endif -%}
             {%- if p.year and p.year != "" %} &middot; {{ p.year }}{% endif -%}
             {%- if p.venue and p.venue != "" %} &middot; {{ p.venue }}{% endif -%}
+            {%- if p.source and p.source != "" %} &middot; {{ p.source }}{% endif -%}
+            {%- if p.doi and p.doi != "" %} &middot; DOI: {{ p.doi }}{% endif -%}
           </p>
+          {%- if p.tags and p.tags != "" -%}<p class="i-tags">{{ p.tags }}</p>{%- endif -%}
           {%- if p.note and p.note != "" -%}<p class="i-note">{{ p.note }}</p>{%- endif -%}
         </div>
         <div class="i-aside">
-          {%- if p.template -%}<span class="tag template">Template</span>{%- else -%}<span class="tag paper">Paper</span>{%- endif -%}
+          <span class="tag paper">{{ p.kind | default: "Paper" | capitalize }}</span>
           {%- if p.link and p.link != "" -%}<p class="i-link"><a href="{{ p.link }}" rel="noopener">Open&nbsp;&rarr;</a></p>{%- endif -%}
         </div>
       </div>
       {%- endfor -%}
+      <p class="empty-note" data-filter-empty hidden>No matching papers for this filter.</p>
+      {%- endif -%}
     </div>
   </div>
 </section>
+
+{%- assign ld_papers = papers | where_exp: "p", "p.link and p.link != ''" -%}
+{%- if ld_papers.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {%- for p in ld_papers -%}
+    {
+      "@type": "ScholarlyArticle",
+      "headline": {{ p.title | jsonify }},
+      "author": {{ p.authors | default: "Unknown author" | jsonify }},
+      "datePublished": {{ p.date | default: p.year | jsonify }},
+      "isPartOf": {{ p.venue | default: "Preprint" | jsonify }},
+      "url": {{ p.link | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+<script>
+  (function () {
+    var root = document.querySelector('.filter-controls[data-filter-root]');
+    var scope = document.querySelector('[data-filter-scope="papers"]');
+    if (!root || !scope) return;
+
+    var input = root.querySelector('[data-filter-input]');
+    var type = root.querySelector('[data-filter-type]');
+    var year = root.querySelector('[data-filter-year]');
+    var clearBtn = root.querySelector('[data-filter-clear]');
+    var items = scope.querySelectorAll('[data-filter-item]');
+    var count = document.querySelector('[data-filter-count]');
+    var empty = scope.querySelector('[data-filter-empty]');
+
+    function applyFilters() {
+      var q = (input.value || '').trim().toLowerCase();
+      var t = (type.value || '').trim().toLowerCase();
+      var y = (year.value || '').trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function (item) {
+        var matchesQuery = !q || (item.getAttribute('data-search') || '').indexOf(q) !== -1;
+        var matchesType = !t || (item.getAttribute('data-type') || '') === t;
+        var matchesYear = !y || (item.getAttribute('data-year') || '') === y;
+        var show = matchesQuery && matchesType && matchesYear;
+        item.hidden = !show;
+        if (show) visible += 1;
+      });
+      if (count) count.textContent = visible + (visible === 1 ? ' entry' : ' entries');
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    input.addEventListener('input', applyFilters);
+    type.addEventListener('change', applyFilters);
+    year.addEventListener('change', applyFilters);
+    clearBtn.addEventListener('click', function () {
+      input.value = '';
+      type.value = '';
+      year.value = '';
+      applyFilters();
+      input.focus();
+    });
+    applyFilters();
+  })();
+</script>

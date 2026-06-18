@@ -20,10 +20,50 @@ sections:
 
 <section class="section">
   <div class="wrap">
+    {%- assign all_resources = site.data.resources | sort: "date" | reverse -%}
+    {%- assign latest_resource = all_resources | first -%}
+
+    <div class="filter-controls" data-filter-root>
+      <label class="sr-only" for="resource-search">Search resources</label>
+      <input id="resource-search" type="search" placeholder="Search title, organisation, note..." data-filter-input />
+      <label class="sr-only" for="resource-section">Filter resources by section</label>
+      <select id="resource-section" data-filter-type>
+        <option value="">All sections</option>
+        {%- for sec in page.sections -%}<option value="{{ sec.id | escape }}">{{ sec.label | strip_html | escape }}</option>{%- endfor -%}
+      </select>
+      <label class="sr-only" for="resource-year">Filter resources by year</label>
+      <select id="resource-year" data-filter-year>
+        <option value="">All years</option>
+        {%- assign seen_resource_years = "" -%}
+        {%- for r in all_resources -%}
+          {%- assign filter_year = r.year -%}
+          {%- if filter_year == nil or filter_year == "" -%}
+            {%- if r.date and r.date != "" -%}{%- assign filter_year = r.date | date: "%Y" -%}{%- endif -%}
+          {%- endif -%}
+          {%- if filter_year and filter_year != "" -%}
+            {%- assign year_token = "|" | append: filter_year | append: "|" -%}
+            {%- unless seen_resource_years contains year_token -%}
+              <option value="{{ filter_year | downcase | escape }}">{{ filter_year | escape }}</option>
+              {%- assign seen_resource_years = seen_resource_years | append: year_token -%}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </select>
+      <button class="btn btn-ghost" type="button" data-filter-clear>Clear</button>
+    </div>
+
+    <div class="list-head">
+      <h2>Resource list</h2>
+      <span class="count" data-filter-count>{{ all_resources | size }} {% if all_resources.size == 1 %}entry{% else %}entries{% endif %}</span>
+      {%- if latest_resource and latest_resource.date and latest_resource.date != "" -%}
+      <span class="count">Last updated {{ latest_resource.date | date: "%-d %b %Y" }}</span>
+      {%- endif -%}
+    </div>
+
     {%- for sec in page.sections -%}
     {%- assign items = site.data.resources | where: "section", sec.id -%}
     {%- if items.size > 0 -%}
-    <div class="list-head" style="margin-top:8px">
+    <div class="list-head section-block-head" data-filter-section-head style="margin-top:8px" data-section="{{ sec.id }}">
       <h2 id="{{ sec.id }}">{{ sec.label }}</h2>
       <span class="count">{{ items | size }} {% if items.size == 1 %}entry{% else %}entries{% endif %}</span>
     </div>
@@ -80,9 +120,13 @@ sections:
       </div>
     </dialog>
     {%- endif -%}
-    <div class="item-list" style="margin-bottom:48px">
+    <div class="item-list section-block-items" style="margin-bottom:48px" data-filter-scope="resources" data-section="{{ sec.id }}">
       {%- for r in items -%}
-      <div class="item">
+      {%- assign resource_filter_year = r.year -%}
+      {%- if resource_filter_year == nil or resource_filter_year == "" -%}
+        {%- if r.date and r.date != "" -%}{%- assign resource_filter_year = r.date | date: "%Y" -%}{%- endif -%}
+      {%- endif -%}
+      <div class="item" data-filter-item data-type="{{ r.section | downcase | escape }}" data-year="{{ resource_filter_year | default: '' | downcase | escape }}" data-search="{{ r.title | append: ' ' | append: r.org | append: ' ' | append: r.note | append: ' ' | append: r.tags | append: ' ' | append: r.source | downcase | escape }}">
         <div class="i-main">
           <h3>
             {%- if r.link and r.link != "" -%}<a href="{{ r.link }}" rel="noopener">{{ r.title }}</a>{%- else -%}{{ r.title }}{%- endif -%}
@@ -90,7 +134,10 @@ sections:
           <p class="i-meta">
             {%- if r.org and r.org != "" -%}{{ r.org }}{%- else -%}Resource{%- endif -%}
             {%- if r.year and r.year != "" %} &middot; {{ r.year }}{% elsif r.date and r.date != "" %} &middot; {{ r.date | date: "%Y" }}{% endif -%}
+            {%- if r.source and r.source != "" %} &middot; {{ r.source }}{% endif -%}
+            {%- if r.doi and r.doi != "" %} &middot; DOI: {{ r.doi }}{% endif -%}
           </p>
+          {%- if r.tags and r.tags != "" -%}<p class="i-tags">{{ r.tags }}</p>{%- endif -%}
           {%- if r.note and r.note != "" -%}<p class="i-note">{{ r.note }}</p>{%- endif -%}
         </div>
         <div class="i-aside">
@@ -106,19 +153,88 @@ sections:
     </div>
     {%- endif -%}
     {%- endfor -%}
+    <p class="empty-note" data-filter-empty hidden>No matching resources for this filter.</p>
   </div>
 </section>
 
 <script>
   (function () {
+    var filterRoot = document.querySelector('.filter-controls[data-filter-root]');
+    if (filterRoot) {
+      var input = filterRoot.querySelector('[data-filter-input]');
+      var type = filterRoot.querySelector('[data-filter-type]');
+      var year = filterRoot.querySelector('[data-filter-year]');
+      var clearBtn = filterRoot.querySelector('[data-filter-clear]');
+      var allItems = document.querySelectorAll('[data-filter-scope="resources"] [data-filter-item]');
+      var scopes = document.querySelectorAll('[data-filter-scope="resources"]');
+      var heads = document.querySelectorAll('[data-filter-section-head]');
+      var count = document.querySelector('[data-filter-count]');
+      var empty = document.querySelector('[data-filter-empty]');
+
+      function applyFilters() {
+        var q = (input.value || '').trim().toLowerCase();
+        var t = (type.value || '').trim().toLowerCase();
+        var y = (year.value || '').trim().toLowerCase();
+        var visible = 0;
+
+        allItems.forEach(function (item) {
+          var matchesQuery = !q || (item.getAttribute('data-search') || '').indexOf(q) !== -1;
+          var matchesType = !t || (item.getAttribute('data-type') || '') === t;
+          var matchesYear = !y || (item.getAttribute('data-year') || '') === y;
+          var show = matchesQuery && matchesType && matchesYear;
+          item.hidden = !show;
+          if (show) visible += 1;
+        });
+
+        scopes.forEach(function (scope) {
+          var hasVisible = !!scope.querySelector('[data-filter-item]:not([hidden])');
+          scope.hidden = !hasVisible;
+          var section = scope.getAttribute('data-section');
+          heads.forEach(function (head) {
+            if (head.getAttribute('data-section') === section) {
+              head.hidden = !hasVisible;
+            }
+          });
+        });
+
+        if (count) count.textContent = visible + (visible === 1 ? ' entry' : ' entries');
+        if (empty) empty.hidden = visible !== 0;
+      }
+
+      input.addEventListener('input', applyFilters);
+      type.addEventListener('change', applyFilters);
+      year.addEventListener('change', applyFilters);
+      clearBtn.addEventListener('click', function () {
+        input.value = '';
+        type.value = '';
+        year.value = '';
+        applyFilters();
+        input.focus();
+      });
+      applyFilters();
+    }
+
     var dialog = document.getElementById('guide-llm-dialog');
     if (!dialog) return;
 
     var openers = document.querySelectorAll('[data-checklist-open]');
     var closer = dialog.querySelector('[data-checklist-close]');
+    var activeOpener = null;
+
+    function closeDialog() {
+      if (typeof dialog.close === 'function' && dialog.open) {
+        dialog.close();
+      } else {
+        dialog.removeAttribute('open');
+      }
+      if (activeOpener && typeof activeOpener.focus === 'function') {
+        activeOpener.focus();
+      }
+    }
 
     openers.forEach(function (opener) {
       opener.addEventListener('click', function () {
+        activeOpener = opener;
         if (typeof dialog.showModal === 'function') {
           dialog.showModal();
         } else {
@@ -129,13 +245,18 @@ sections:
 
     if (closer) {
       closer.addEventListener('click', function () {
-        dialog.close();
+        closeDialog();
       });
     }
 
     dialog.addEventListener('click', function (event) {
       if (event.target === dialog) {
-        dialog.close();
+        closeDialog();
+      }
+    });
+    dialog.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeDialog();
       }
     });
   })();

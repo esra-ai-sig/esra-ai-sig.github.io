@@ -15,6 +15,9 @@
 #   year     : display year (optional; falls back to date's year)
 #   link     : URL to the resource
 #   checklist_link : URL to an accompanying checklist/table (optional)
+#   source   : optional source label (e.g., "Report", "Dataset", "Tool docs")
+#   doi      : optional DOI string
+#   tags     : optional comma-separated keywords for filtering
 #   note     : one-line description
 # ============================================================
 
