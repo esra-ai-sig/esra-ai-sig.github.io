@@ -301,6 +301,24 @@ section.band.stone { background: var(--surface); }
 .cta-cell + .cta-cell { border-left: 1px solid var(--line); }
 .cta-cell h3 { font-size: 21px; font-weight: 600; margin-bottom: 10px; }
 .cta-cell p { color: var(--muted); margin: 0 0 22px; font-size: 15.5px; }
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.cta-cell .fine-note {
+  margin: 0 0 8px;
+  color: var(--faint);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.cta-cell .fine-note code {
+  font-family: var(--mono);
+  font-size: .92em;
+  color: var(--ink);
+}
 
 /* ============================================================
    inner pages — page hero + prose + lists

@@ -15,8 +15,15 @@ description: >-
       <div class="cta-cell">
         <p class="eyebrow">Mailing list</p>
         <h3>Join the mailing list</h3>
-        <p>Webinar invitations, calls for resources, and group news are sent through the ESRA-AI-SIG JiscMail list. JiscMail handles subscriptions, archives, and unsubscribe preferences.</p>
-        <a class="btn btn-primary" href="{{ site.mailing_list_url }}">Subscribe on JiscMail <span class="arr">&rarr;</span></a>
+        <p>Webinar invitations, calls for resources, and group news are sent through the {{ site.mailing_list_name }} JiscMail list. The direct subscribe page opens the JiscMail confirmation flow; the email option works if you send it from the address you want subscribed.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="{{ site.mailing_list_url }}" target="_blank" rel="noopener">Subscribe online <span class="arr">&rarr;</span></a>
+          <a class="btn btn-ghost" href="{{ site.mailing_list_email_url }}">Subscribe by email</a>
+        </div>
+        <p class="fine-note">Replace <code>Firstname Lastname</code> in the email before sending. JiscMail may still send a confirmation or approval email.</p>
+        {%- if site.mailing_list_home_url and site.mailing_list_home_url != "" -%}
+        <p class="fine-note"><a href="{{ site.mailing_list_home_url }}" target="_blank" rel="noopener">View list information and archives</a></p>
+        {%- endif -%}
       </div>
       <div class="cta-cell">
         <p class="eyebrow">Contact</p>
