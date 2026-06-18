@@ -17,15 +17,6 @@
 #   kind     : optional label for badge (e.g., "paper", "preprint")
 #   link     : DOI / arXiv / publisher URL
 #   note     : one-line note on why it is relevant
-#   template : true  -> hidden from public pages
 # ============================================================
 
-- type: paper
-  title: "Example paper or preprint — replace me"
-  authors: "Surname, A., Surname, B."
-  year: ""
-  date: ""
-  venue: "Journal or preprint server"
-  link: ""
-  note: "Replace with a curated paper: a short note on its relevance to AI in survey research."
-  template: true
+[]

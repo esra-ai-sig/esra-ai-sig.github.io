@@ -82,13 +82,15 @@ description: >-
   </div>
 </section>
 
-{%- assign ld_papers = papers | where_exp: "p", "p.link and p.link != ''" -%}
-{%- if ld_papers.size > 0 -%}
+{%- if papers.size > 0 -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {%- for p in ld_papers -%}
+    {%- assign first_ld_paper = true -%}
+    {%- for p in papers -%}
+    {%- if p.link and p.link != "" -%}
+    {%- unless first_ld_paper -%},{%- endunless -%}
     {
       "@type": "ScholarlyArticle",
       "headline": {{ p.title | jsonify }},
@@ -96,7 +98,9 @@ description: >-
       "datePublished": {{ p.date | default: p.year | jsonify }},
       "isPartOf": {{ p.venue | default: "Preprint" | jsonify }},
       "url": {{ p.link | jsonify }}
-    }{% unless forloop.last %},{% endunless %}
+    }
+    {%- assign first_ld_paper = false -%}
+    {%- endif -%}
     {%- endfor -%}
   ]
 }

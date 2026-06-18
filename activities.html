@@ -105,13 +105,15 @@ description: >-
   </div>
 </section>
 
-{%- assign ld_events = site.data.events | where_exp: "ev", "ev.link and ev.link != '' and ev.date and ev.date != ''" -%}
-{%- if ld_events.size > 0 -%}
+{%- if events.size > 0 -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {%- for ev in ld_events -%}
+    {%- assign first_ld_event = true -%}
+    {%- for ev in events -%}
+    {%- if ev.link and ev.link != "" and ev.date and ev.date != "" -%}
+    {%- unless first_ld_event -%},{%- endunless -%}
     {
       "@type": "Event",
       "name": {{ ev.title | jsonify }},
@@ -127,7 +129,9 @@ description: >-
         "name": "ESRA AI-SIG"
       },
       "url": {{ ev.link | jsonify }}
-    }{% unless forloop.last %},{% endunless %}
+    }
+    {%- assign first_ld_event = false -%}
+    {%- endif -%}
     {%- endfor -%}
   ]
 }
