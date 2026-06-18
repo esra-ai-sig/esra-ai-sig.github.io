@@ -22,7 +22,6 @@ sections:
   <div class="wrap">
     {%- assign all_resources = site.data.resources | sort: "date" | reverse -%}
     {%- assign latest_resource = all_resources | first -%}
-    {%- assign resource_years = all_resources | map: "year" | compact | uniq | sort | reverse -%}
 
     <div class="filter-controls" data-filter-root>
       <label class="sr-only" for="resource-search">Search resources</label>
@@ -30,12 +29,25 @@ sections:
       <label class="sr-only" for="resource-section">Filter resources by section</label>
       <select id="resource-section" data-filter-type>
         <option value="">All sections</option>
-        {%- for sec in page.sections -%}<option value="{{ sec.id }}">{{ sec.label | strip_html }}</option>{%- endfor -%}
+        {%- for sec in page.sections -%}<option value="{{ sec.id | escape }}">{{ sec.label | strip_html | escape }}</option>{%- endfor -%}
       </select>
       <label class="sr-only" for="resource-year">Filter resources by year</label>
       <select id="resource-year" data-filter-year>
         <option value="">All years</option>
-        {%- for y in resource_years -%}<option value="{{ y }}">{{ y }}</option>{%- endfor -%}
+        {%- assign seen_resource_years = "" -%}
+        {%- for r in all_resources -%}
+          {%- assign filter_year = r.year -%}
+          {%- if filter_year == nil or filter_year == "" -%}
+            {%- if r.date and r.date != "" -%}{%- assign filter_year = r.date | date: "%Y" -%}{%- endif -%}
+          {%- endif -%}
+          {%- if filter_year and filter_year != "" -%}
+            {%- assign year_token = "|" | append: filter_year | append: "|" -%}
+            {%- unless seen_resource_years contains year_token -%}
+              <option value="{{ filter_year | downcase | escape }}">{{ filter_year | escape }}</option>
+              {%- assign seen_resource_years = seen_resource_years | append: year_token -%}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
       </select>
       <button class="btn btn-ghost" type="button" data-filter-clear>Clear</button>
     </div>
@@ -110,7 +122,11 @@ sections:
     {%- endif -%}
     <div class="item-list section-block-items" style="margin-bottom:48px" data-filter-scope="resources" data-section="{{ sec.id }}">
       {%- for r in items -%}
-      <div class="item" data-filter-item data-type="{{ r.section | downcase }}" data-year="{{ r.year | default: '' | downcase }}" data-search="{{ r.title | append: ' ' | append: r.org | append: ' ' | append: r.note | append: ' ' | append: r.tags | append: ' ' | append: r.source | downcase }}">
+      {%- assign resource_filter_year = r.year -%}
+      {%- if resource_filter_year == nil or resource_filter_year == "" -%}
+        {%- if r.date and r.date != "" -%}{%- assign resource_filter_year = r.date | date: "%Y" -%}{%- endif -%}
+      {%- endif -%}
+      <div class="item" data-filter-item data-type="{{ r.section | downcase | escape }}" data-year="{{ resource_filter_year | default: '' | downcase | escape }}" data-search="{{ r.title | append: ' ' | append: r.org | append: ' ' | append: r.note | append: ' ' | append: r.tags | append: ' ' | append: r.source | downcase | escape }}">
         <div class="i-main">
           <h3>
             {%- if r.link and r.link != "" -%}<a href="{{ r.link }}" rel="noopener">{{ r.title }}</a>{%- else -%}{{ r.title }}{%- endif -%}
