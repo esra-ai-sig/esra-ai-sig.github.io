@@ -1,0 +1,26 @@
+# ============================================================
+# OPPORTUNITIES  (calls for papers, submission deadlines, awards)
+# ------------------------------------------------------------
+# Chairs: add an opportunity by copying a block below and editing it.
+#
+# Fields:
+#   type      : always "opportunity"  (drives the Latest feed + badge)
+#   kind      : call for papers | award | funding | participation
+#   title     : opportunity title
+#   date      : YYYY-MM-DD deadline or key date
+#   status    : open | closed
+#   link      : URL to the call or opportunity
+#   source    : optional source label
+#   tags      : optional comma-separated keywords
+#   note      : one-line description
+# ============================================================
+
+- type: opportunity
+  kind: call for papers
+  title: "Call for papers: Survey Practice special issue on AI-assisted surveys"
+  date: "2026-11-15"
+  status: open
+  link: "https://www.surveypractice.org/post/4030-survey-practice-special-issue-on-ai-assisted-surveys"
+  source: "Survey Practice"
+  tags: "AI-assisted surveys, survey lifecycle, LLMs"
+  note: "Survey Practice seeks applied, evidence-based papers on AI assistance across survey workflows; submissions are reviewed on a rolling basis ahead of the 15 November 2026 deadline."

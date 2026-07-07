@@ -3,7 +3,7 @@ layout: page
 title: Activities
 eyebrow: Activities
 heading: Programme of webinars, symposia &amp; courses
-lede: The SIG runs four webinars, at least one symposium or panel, and one short course each year. Scheduled events are listed below.
+lede: The SIG runs four webinars, at least one symposium or panel, and one short course each year. Scheduled events and relevant calls are listed below.
 description: >-
   The ESRA AI-SIG activities programme — webinars, symposia and panels, and short
   courses on AI in survey research.
@@ -38,11 +38,20 @@ description: >-
   <div class="wrap">
     {%- assign events = site.data.events | sort: "date" -%}
     {%- assign latest_event = events | last -%}
-    {%- assign upcoming = events | where: "status", "upcoming" -%}
-    {%- assign past = events | where_exp: "ev", "ev.status != 'upcoming'" | reverse -%}
+    {%- assign today = site.time | date: "%Y-%m-%d" -%}
+    {%- assign upcoming_count = 0 -%}
+    {%- assign past_count = 0 -%}
+    {%- for ev in events -%}
+      {%- if ev.status == "upcoming" and ev.date >= today -%}
+        {%- assign upcoming_count = upcoming_count | plus: 1 -%}
+      {%- elsif ev.status != "upcoming" or ev.date < today -%}
+        {%- assign past_count = past_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign opportunities = site.data.opportunities | sort: "date" | reverse -%}
     <div class="list-head">
       <h2>Upcoming events</h2>
-      <span class="count">{{ upcoming | size }} listed</span>
+      <span class="count">{{ upcoming_count }} listed</span>
       {%- if latest_event and latest_event.date and latest_event.date != "" -%}
       <span class="count">Last updated {{ latest_event.date | date: "%-d %b %Y" }}</span>
       {%- endif -%}
@@ -50,10 +59,11 @@ description: >-
     <p class="list-note">Event times and time zones are shown on each event page or registration link.</p>
 
     <div class="item-list">
-      {%- if upcoming.size == 0 -%}
+      {%- if upcoming_count == 0 -%}
       <p class="empty-note">No upcoming events are listed yet.</p>
       {%- endif -%}
-      {%- for ev in upcoming -%}
+      {%- for ev in events -%}
+      {%- if ev.status == "upcoming" and ev.date >= today -%}
       <div class="item">
         <div class="i-main">
           <h3>
@@ -67,6 +77,38 @@ description: >-
         </div>
         <div class="i-aside">
           <span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>
+        </div>
+      </div>
+      {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="list-head">
+      <h2>Calls and opportunities</h2>
+      <span class="count">{{ opportunities | size }} listed</span>
+    </div>
+    <div class="item-list">
+      {%- if opportunities.size == 0 -%}
+      <p class="empty-note">No calls or opportunities are listed yet.</p>
+      {%- endif -%}
+      {%- for op in opportunities -%}
+      <div class="item">
+        <div class="i-main">
+          <h3>
+            {%- if op.link and op.link != "" -%}<a href="{{ op.link }}" rel="noopener">{{ op.title }}</a>{%- else -%}{{ op.title }}{%- endif -%}
+          </h3>
+          <p class="i-meta">
+            {{ op.kind | capitalize }}{% if op.date and op.date != "" %} &middot; deadline {{ op.date | date: "%-d %B %Y" }}{% endif %}{% if op.source and op.source != "" %} &middot; {{ op.source }}{% endif %}
+          </p>
+          {%- if op.tags and op.tags != "" -%}<p class="i-tags">{{ op.tags }}</p>{%- endif -%}
+          {%- if op.note and op.note != "" -%}<p class="i-note">{{ op.note }}</p>{%- endif -%}
+        </div>
+        <div class="i-aside">
+          <span class="tag opportunity">{{ op.status | default: op.kind | capitalize }}</span>
         </div>
       </div>
       {%- endfor -%}
@@ -78,13 +120,15 @@ description: >-
   <div class="wrap">
     <div class="list-head">
       <h2>Past events</h2>
-      <span class="count">{{ past | size }} listed</span>
+      <span class="count">{{ past_count }} listed</span>
     </div>
     <div class="item-list">
-      {%- if past.size == 0 -%}
+      {%- if past_count == 0 -%}
       <p class="empty-note">Past events will appear here after they run.</p>
       {%- endif -%}
-      {%- for ev in past -%}
+      {%- assign events_desc = events | reverse -%}
+      {%- for ev in events_desc -%}
+      {%- if ev.status != "upcoming" or ev.date < today -%}
       <div class="item">
         <div class="i-main">
           <h3>
@@ -100,6 +144,7 @@ description: >-
           <span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>
         </div>
       </div>
+      {%- endif -%}
       {%- endfor -%}
     </div>
   </div>

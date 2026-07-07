@@ -9,11 +9,11 @@ description: >-
   reports, organisations, datasets and tools, and methods resources.
 sections:
   - id: guidance
-    label: Guidance &amp; reports
+    label: "Guidance & reports"
   - id: organisations
     label: Organisations
   - id: datasets
-    label: Datasets &amp; tools
+    label: "Datasets & tools"
   - id: methods
     label: Methods resources
 ---
@@ -29,7 +29,7 @@ sections:
       <label class="sr-only" for="resource-section">Filter resources by section</label>
       <select id="resource-section" data-filter-type>
         <option value="">All sections</option>
-        {%- for sec in page.sections -%}<option value="{{ sec.id | escape }}">{{ sec.label | strip_html | escape }}</option>{%- endfor -%}
+        {%- for sec in page.sections -%}<option value="{{ sec.id | escape }}">{{ sec.label | escape }}</option>{%- endfor -%}
       </select>
       <label class="sr-only" for="resource-year">Filter resources by year</label>
       <select id="resource-year" data-filter-year>
@@ -64,7 +64,7 @@ sections:
     {%- assign items = site.data.resources | where: "section", sec.id -%}
     {%- if items.size > 0 -%}
     <div class="list-head section-block-head" data-filter-section-head style="margin-top:8px" data-section="{{ sec.id }}">
-      <h2 id="{{ sec.id }}">{{ sec.label }}</h2>
+      <h2 id="{{ sec.id }}">{{ sec.label | escape }}</h2>
       <span class="count">{{ items | size }} {% if items.size == 1 %}entry{% else %}entries{% endif %}</span>
     </div>
     {%- if sec.id == "guidance" -%}
@@ -165,9 +165,9 @@ sections:
       var type = filterRoot.querySelector('[data-filter-type]');
       var year = filterRoot.querySelector('[data-filter-year]');
       var clearBtn = filterRoot.querySelector('[data-filter-clear]');
-      var allItems = document.querySelectorAll('[data-filter-scope="resources"] [data-filter-item]');
-      var scopes = document.querySelectorAll('[data-filter-scope="resources"]');
-      var heads = document.querySelectorAll('[data-filter-section-head]');
+      var allItems = Array.prototype.slice.call(document.querySelectorAll('[data-filter-scope="resources"] [data-filter-item]'));
+      var scopes = Array.prototype.slice.call(document.querySelectorAll('[data-filter-scope="resources"]'));
+      var heads = Array.prototype.slice.call(document.querySelectorAll('[data-filter-section-head]'));
       var count = document.querySelector('[data-filter-count]');
       var empty = document.querySelector('[data-filter-empty]');
 
@@ -187,9 +187,11 @@ sections:
         });
 
         scopes.forEach(function (scope) {
-          var hasVisible = !!scope.querySelector('[data-filter-item]:not([hidden])');
-          scope.hidden = !hasVisible;
           var section = scope.getAttribute('data-section');
+          var hasVisible = allItems.some(function (item) {
+            return item.closest('[data-filter-scope="resources"]').getAttribute('data-section') === section && !item.hidden;
+          });
+          scope.hidden = !hasVisible;
           heads.forEach(function (head) {
             if (head.getAttribute('data-section') === section) {
               head.hidden = !hasVisible;

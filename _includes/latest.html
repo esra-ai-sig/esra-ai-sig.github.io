@@ -1,12 +1,12 @@
 {%- comment -%}
-  Latest feed — AUTOMATICALLY generated from the three data files.
-  Merges resources + papers + events, sorts by `date` (newest first),
+  Latest feed — AUTOMATICALLY generated from the data files.
+  Merges resources + papers + events + opportunities, sorts by `date` (newest first),
   and shows the most recent N. Nothing here is hardcoded: edit the
   _data/*.yml files and this list updates on the next build.
   Optional: pass a limit, e.g. {% include latest.html limit=4 %}
 {%- endcomment -%}
 {%- assign n = include.limit | default: 5 -%}
-{%- assign feed = site.data.resources | concat: site.data.papers | concat: site.data.events -%}
+{%- assign feed = site.data.resources | concat: site.data.papers | concat: site.data.events | concat: site.data.opportunities -%}
 {%- assign feed = feed | sort: "date" | reverse -%}
 <div class="feed">
   {%- for item in feed limit: n -%}

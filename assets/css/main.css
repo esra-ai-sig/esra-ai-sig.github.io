@@ -215,6 +215,7 @@ header.site {
 }
 .tag.resource { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
 .tag.event { color: #8a5a1c; border-color: #e3d3bb; }
+.tag.opportunity { color: #0f6b5f; border-color: #bcded8; }
 .tag.paper { color: #3a3f8a; border-color: #cdcfe8; }
 .tag.template { color: var(--faint); border-style: dashed; }
 
