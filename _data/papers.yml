@@ -1,4 +1,14 @@
 # kind: Published paper | Working paper | Preprint. Use the real publication date.
+- title: "Evaluating Large Language Models (LLMs) for Coding Open-Ended Survey Responses: A Total Survey Error Framework"
+  authors: "Laone Maphane and Gabriele Durrant"
+  year: 2026
+  date: "2026-10-12"
+  kind: "Working paper"
+  venue: "SocArXiv · Preprint, version 1"
+  doi: "10.31235/osf.io/2rjm6_v1"
+  link: "https://osf.io/preprints/socarxiv/2rjm6_v1"
+  tags: "Open-ended responses, automated coding, LLMs, Total Survey Error"
+  note: "Develops a Total Survey Error framework for evaluating automated coding of open-ended survey responses. Applied to NatCen data, it considers agreement with human coding alongside measurement validity, prevalence distortion, coding density, response-form sensitivity and operational reliability."
 - title: "SOCbot: Using Large Language Models to Dynamically Measure and Classify Occupations in Surveys"
   authors: "Patrick Sturgis, Thomas S. Robinson, Laura Fung and Caroline Roberts"
   year: 2026
