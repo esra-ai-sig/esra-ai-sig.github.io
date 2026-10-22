@@ -24,3 +24,18 @@
   source: "Survey Practice"
   tags: "AI-assisted surveys, survey lifecycle, LLMs"
   note: "Survey Practice seeks applied, evidence-based papers on AI assistance across survey workflows; submissions are reviewed on a rolling basis ahead of the 15 November 2026 deadline."
+
+- type: opportunity
+  kind: registration
+  title: "Register for the IHS survey-lifecycle AI workshop"
+  date: "2026-11-30"
+  source: "IHS Vienna"
+  link: "https://www.ihs.ac.at/de/news-und-events/events/detail/ai-within-the-survey-lifecycle-potentials-and-risks/"
+  note: "Free workshop in Vienna on 11–12 March 2027. Places are limited; registration closes on 30 November."
+- type: opportunity
+  kind: call for posters
+  title: "Contribute a poster: AI within the Survey Lifecycle"
+  date: "2026-12-15"
+  source: "IHS Vienna"
+  link: "https://www.ihs.ac.at/de/news-und-events/events/detail/ai-within-the-survey-lifecycle-potentials-and-risks/"
+  note: "Submit a short abstract of up to 200 words. Practical use cases and work in progress are welcome."

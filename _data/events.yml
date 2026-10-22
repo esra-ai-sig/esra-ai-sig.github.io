@@ -1,38 +1,126 @@
-# ============================================================
-# EVENTS  (webinars, symposia/panels, short courses)
-# ------------------------------------------------------------
-# Chairs: add an event by copying a block below and editing it.
-#
-# Fields:
-#   type      : always "event"        (drives the Latest feed + badge)
-#   kind      : webinar | symposium | course
-#   title     : event title
-#   date      : YYYY-MM-DD
-#   status    : upcoming | past
-#   speaker   : optional
-#   location  : optional (e.g. "Online", "ESRA 2027, Utrecht")
-#   link      : optional registration / recording URL
-#   source    : optional source label (e.g., "NCRM", "ESRA")
-#   tags      : optional comma-separated keywords
-#   note      : one-line description
-# ============================================================
-
-- type: event
-  kind: course
-  title: "AI for Survey Researchers: A three-workshop series"
-  date: "2026-06-08"
-  status: upcoming
-  speaker: "Dr Paulo Serôdio"
+# Dates are ISO strings. Use end_date for multi-day events and dates for course sessions.
+# An announced event may have a month without inventing a day. Pending proposals have no date.
+- id: launch-2026
+  programme_order: 1
+  kind: webinar
+  title: "SIG launch: evaluating LLMs for coding open-ended survey responses"
+  date: "2026-10-22"
+  end_date: "2026-10-22"
+  time: "13:00–14:00 BST (Europe/London)"
+  speaker: "Laone Maphane, presenting joint work with Gabriele Durrant"
+  organiser: "NCRM AI Survey Network / ESRA AI-SIG"
+  location: "Online · Microsoft Teams"
+  link: "https://www.ncrm.ac.uk/news/show.php?article=5884"
+  note: "Launch of the ESRA AI Special Interest Group, alongside a talk on evaluating LLM coding using a Total Survey Error framework and discussion of AI in survey research."
+  affiliation: sig
+- id: thematic-analysis-2026
+  programme_order: 2
+  kind: webinar
+  title: "Large-scale thematic analysis using LLMs"
+  month: "2026-11"
+  status: announced
+  organiser: "ESRA AI-SIG"
   location: "Online"
-  link: "https://www.ncrm.ac.uk/training/show.php?article=14796"
-  note: "An NCRM online workshop series running on 8 June, 22 June, and 6 July 2026, covering LLMs, context engineering, API workflows, retrieval-augmented generation, agentic AI, and research transparency."
-
-- type: event
+  note: "Our November webinar will explore large-scale thematic analysis using large language models. The date, speakers and registration details will be announced through the mailing list."
+  affiliation: sig
+- id: agentic-coding-2026
+  kind: course
+  title: "Agentic Coding for Survey Research"
+  date: "2026-11-05"
+  end_date: "2026-11-19"
+  dates: ["2026-11-05", "2026-11-12", "2026-11-19"]
+  speaker: "Antonio Mele"
+  organiser: "NCRM, University of Southampton"
+  location: "Online"
+  link: "https://www.ncrm.ac.uk/training/show.php?article=14958"
+  note: "A practical three-day course on Cursor, GitHub and auditable survey workflows, with role-specific tracks for researchers, survey practitioners and data managers. Covers privacy, restricted data, reproducibility and human review."
+  affiliation: external
+- id: vibe-coding-2026
+  kind: course
+  title: "Vibe Coding: An Introduction for Social Scientists"
+  date: "2026-11-09"
+  end_date: "2026-11-10"
+  dates: ["2026-11-09", "2026-11-10"]
+  speaker: "Dipanjan Saha"
+  organiser: "University of Liverpool · listed by NCRM"
+  location: "Online"
+  link: "https://www.ncrm.ac.uk/training/show.php?article=14966"
+  note: "Two mornings introducing AI-assisted coding for social scientists with no programming background. Build, test and debug research tools while considering methodological limits, ethics and data security."
+  affiliation: external
+- id: ai-survey-researchers-2026
+  kind: course
+  title: "AI for Survey Researchers"
+  date: "2026-11-23"
+  end_date: "2026-12-07"
+  dates: ["2026-11-23", "2026-11-30", "2026-12-07"]
+  time: "09:30–13:30 GMT (Europe/London), each session"
+  speaker: "Paulo Serôdio"
+  organiser: "NCRM, University of Southampton"
+  location: "Online"
+  link: "https://www.ncrm.ac.uk/training/show.php?article=14967"
+  note: "Three half-day workshops: how LLMs work; context engineering, APIs and evaluation; and agentic AI and harness engineering. Workshop 1 requires no programming experience; later workshops build on the earlier concepts."
+  affiliation: external
+- id: ihs-2027
+  kind: workshop
+  title: "AI within the Survey Lifecycle – Potentials and Risks"
+  date: "2027-03-11"
+  end_date: "2027-03-12"
+  time: "11 March, 13:00 – 12 March, 15:15 CET (Europe/Vienna)"
+  organiser: "Institute for Advanced Studies (IHS)"
+  location: "Vienna, Austria"
+  link: "https://www.ihs.ac.at/de/news-und-events/events/detail/ai-within-the-survey-lifecycle-potentials-and-risks/"
+  note: "A free workshop on AI across the survey lifecycle, with a keynote, posters and roundtable discussions. Registration closes 30 November 2026; poster abstracts are due 15 December 2026."
+  affiliation: external
+- id: esra-text-coding-2027
+  programme_order: 3
+  kind: symposium
+  title: "LLMs for Open-Ended Text Coding: Progress, Opportunities and Ongoing Barriers"
+  date: "2027-07-19"
+  end_date: "2027-07-23"
+  status: accepted
+  organiser: "Liam Wright, Matt Brown, Erica Wong and Laone Maphane"
+  location: "ESRA 2027 · Paris, France"
+  link: "https://www.europeansurveyresearch.org/conf2027/sessions.php?sess=131"
+  note: "An accepted ESRA session on LLM coding and classification of open text in survey research, including applications, evaluation, negative findings and work in progress. Conference: 19–23 July 2027; the session date and time are to be announced."
+  affiliation: sig
+- id: esra-data-usability-2027
+  programme_order: 4
+  kind: symposium
+  title: "Generative Artificial Intelligence for Enhancing and Increasing the Usability of Survey Data"
+  date: "2027-07-19"
+  end_date: "2027-07-23"
+  status: accepted
+  organiser: "Liam Wright, David Bann and Paulo Serôdio"
+  location: "ESRA 2027 · Paris, France"
+  link: "https://www.europeansurveyresearch.org/conf2027/sessions.php?sess=130"
+  note: "An accepted ESRA session on making survey data easier to discover, explore and analyse, and on linking novel data sources. Conference: 19–23 July 2027; the session date and time are to be announced."
+  affiliation: sig
+- id: esra-course-proposal-2027
+  programme_order: 5
+  kind: course
+  title: "Proposed AI training at ESRA 2027"
+  status: pending
+  organiser: "ESRA AI-SIG"
+  location: "ESRA 2027 · Paris, France"
+  note: "A training proposal has been submitted and is awaiting approval. The title, programme, date and booking details will be shared if it is accepted."
+  affiliation: sig
+- id: ons-2026
   kind: webinar
   title: "Technical learnings from building AI into public surveys"
   date: "2026-06-11"
-  status: upcoming
   speaker: "Steve Gibbard (ONS)"
   location: "Online"
-  link: "https://teams.microsoft.com/meet/31773388529921?p=zegj6AfWAu0G6OUOG9"
-  note: "A 12:00-13:00 online session on the architecture, challenges, and lessons from deploying AI-powered survey functionality in a public test environment."
+  note: "A session on architecture, challenges and lessons from deploying AI-powered survey functionality in a public test environment."
+  affiliation: external
+- id: ai-survey-researchers-june-2026
+  kind: course
+  title: "AI for Survey Researchers: summer workshop series"
+  date: "2026-06-08"
+  end_date: "2026-07-06"
+  dates: ["2026-06-08", "2026-06-22", "2026-07-06"]
+  speaker: "Paulo Serôdio"
+  organiser: "NCRM"
+  location: "Online"
+  link: "https://www.ncrm.ac.uk/training/show.php?article=14796"
+  note: "The earlier three-workshop series on LLMs, context engineering, API workflows and agentic AI."
+  affiliation: external

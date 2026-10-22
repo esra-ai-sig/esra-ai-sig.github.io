@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "15 4 * * *"
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -31,12 +34,17 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+      - name: Check event status boundaries
+        run: bundle exec ruby scripts/check_event_states.rb
+      - name: Check generated pages
+        run: python3 scripts/check_site.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

@@ -1,0 +1,17 @@
+---
+layout: page
+title: Software & workflows
+heading: Software & workflows
+lede: Survey-related repositories, reusable skills and practical implementations, selected by the chairs.
+---
+<section class="section"><div class="wrap">
+  <p>These links are starting points for research, rather than endorsements. Check the documentation, licence, data handling and evaluation before adapting a tool to your own survey.</p>
+  <div class="item-list">
+  {% for tool in site.data.tools %}<article class="item"><div class="i-main">
+    <p class="entry-label">{{ tool.kind }} · {{ tool.authors | escape }}</p>
+    <h2><a href="{{ tool.link | escape }}">{{ tool.title | escape }}</a></h2>
+    <p>{{ tool.note | escape }}</p><p class="i-meta">{{ tool.requirements | escape }}</p><p class="i-meta">{{ tool.evidence | escape }}</p>
+    <div class="button-row"><a class="text-link" href="{{ tool.link | escape }}">View repository<span class="sr-only">: {{ tool.title | escape }}</span></a>{% if tool.paper %}<a class="text-link" href="{{ tool.paper | escape }}">Read supporting paper<span class="sr-only"> for {{ tool.title | escape }}</span></a>{% endif %}</div>
+  </div></article>{% endfor %}
+  </div><p>Have a survey-related skill, plugin or worked example to share? <a href="{{ '/join/#suggest' | relative_url }}">Suggest an addition</a>.</p>
+</div></section>

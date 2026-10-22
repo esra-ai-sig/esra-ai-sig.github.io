@@ -3,7 +3,7 @@ layout: page
 title: Papers
 eyebrow: Papers &amp; preprints
 heading: Papers &amp; preprints
-lede: A curated, manually maintained reading list on AI and machine learning in survey research. We do not scrape &mdash; entries are chosen by the chairs.
+lede: Published papers, working papers and preprints on AI in survey research, selected by the chairs.
 description: >-
   A curated list of papers and preprints on artificial intelligence and machine
   learning in survey research.
@@ -23,7 +23,7 @@ description: >-
       <select id="paper-type" data-filter-type>
         <option value="">All types</option>
         {%- assign paper_types = papers | map: "kind" | compact | uniq | sort -%}
-        <option value="paper">Paper</option>
+
         {%- for t in paper_types -%}
           {%- assign tv = t | downcase -%}
           {%- unless tv == "paper" -%}<option value="{{ tv | escape }}">{{ t | capitalize | escape }}</option>{%- endunless -%}
@@ -40,10 +40,8 @@ description: >-
 
     <div class="list-head">
       <h2>Reading list</h2>
-      <span class="count" data-filter-count>{{ papers | size }} {% if papers.size == 1 %}entry{% else %}entries{% endif %}</span>
-      {%- if latest_paper and latest_paper.date and latest_paper.date != "" -%}
-      <span class="count">Last updated {{ latest_paper.date | date: "%-d %b %Y" }}</span>
-      {%- endif -%}
+      <span class="count" data-filter-count role="status" aria-live="polite">{{ papers | size }} {% if papers.size == 1 %}entry{% else %}entries{% endif %}</span>
+
     </div>
 
     <div class="item-list" data-filter-scope="papers">
@@ -55,7 +53,7 @@ description: >-
       {%- if paper_filter_year == nil or paper_filter_year == "" -%}
         {%- if p.date and p.date != "" -%}{%- assign paper_filter_year = p.date | date: "%Y" -%}{%- endif -%}
       {%- endif -%}
-      <div class="item" data-filter-item data-type="{{ p.kind | default: 'paper' | downcase | escape }}" data-year="{{ paper_filter_year | default: '' | downcase | escape }}" data-search="{{ p.title | append: ' ' | append: p.authors | append: ' ' | append: p.venue | append: ' ' | append: p.note | append: ' ' | append: p.tags | downcase | escape }}">
+      <div class="item" data-filter-item data-type="{{ p.kind | default: 'Published paper' | downcase | escape }}" data-year="{{ paper_filter_year | default: '' | downcase | escape }}" data-search="{{ p.title | append: ' ' | append: p.authors | append: ' ' | append: p.venue | append: ' ' | append: p.note | append: ' ' | append: p.tags | downcase | escape }}">
         <div class="i-main">
           <h3>
             {%- if p.link and p.link != "" -%}<a href="{{ p.link }}" rel="noopener">{{ p.title }}</a>{%- else -%}{{ p.title }}{%- endif -%}
@@ -72,7 +70,8 @@ description: >-
         </div>
         <div class="i-aside">
           <span class="tag paper">{{ p.kind | default: "Paper" | capitalize }}</span>
-          {%- if p.link and p.link != "" -%}<p class="i-link"><a href="{{ p.link }}" rel="noopener">Open&nbsp;&rarr;</a></p>{%- endif -%}
+          {%- if p.link and p.link != "" -%}<p class="i-link"><a href="{{ p.link }}">Read paper<span class="sr-only">: {{ p.title | escape }}</span></a></p>{%- endif -%}
+          {% if p.code %}<p class="i-link"><a href="{{ p.code }}">Replication code<span class="sr-only"> for {{ p.title | escape }}</span></a></p>{% endif %}
         </div>
       </div>
       {%- endfor -%}

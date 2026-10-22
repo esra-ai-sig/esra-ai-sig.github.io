@@ -33,7 +33,7 @@ baseurl: ""
 og_image: "/assets/img/esra-logo.png"
 
 # ============================================================
-# Get-involved endpoints  —  REPLACE THESE PLACEHOLDERS
+# Get-involved endpoints
 # ============================================================
 # mailing_list_url : the direct public JiscMail subscription page. Visitors
 #                    subscribe there so JiscMail handles subscriber data,
@@ -41,14 +41,10 @@ og_image: "/assets/img/esra-logo.png"
 # mailing_list_home_url : public JiscMail list information/archive page.
 # mailing_list_email_url : fallback LISTSERV email command route for visitors
 #                    who prefer to subscribe from their email client.
-# suggestion_form_action : the POST endpoint for the suggestion form. GitHub
-#                    Pages cannot process form submissions itself, so use a
-#                    third-party form service such as Formspree.
 mailing_list_name: "ESRA-AI-SIG"
 mailing_list_url: "https://www.jiscmail.ac.uk/cgi-bin/webadmin?SUBED1=ESRA-AI-SIG&A=1"
 mailing_list_home_url: "https://www.jiscmail.ac.uk/lists/ESRA-AI-SIG.html"
 mailing_list_email_url: "mailto:listserv@jiscmail.ac.uk?body=SUBSCRIBE%20ESRA-AI-SIG%20Firstname%20Lastname"
-suggestion_form_action: ""
 suggestion_email: "pamato@essex.ac.uk"
 
 # --- Build settings ---
@@ -69,3 +65,5 @@ exclude:
   - Gemfile.lock
   - vendor/
   - prototype/
+  - CONTRIBUTING.md
+  - scripts/
