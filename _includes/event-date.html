@@ -1,0 +1,10 @@
+{%- assign ev = include.event -%}
+{%- if ev.dates -%}
+  {%- for day in ev.dates -%}<time datetime="{{ day }}">{{ day | date: "%-d %B %Y" }}</time>{% unless forloop.last %}; {% endunless %}{%- endfor -%}
+{%- elsif ev.status == 'accepted' -%}
+  Conference: <time datetime="{{ ev.date }}">{{ ev.date | date: "%-d" }}</time>–<time datetime="{{ ev.end_date }}">{{ ev.end_date | date: "%-d %B %Y" }}</time> · Session schedule to follow
+{%- elsif ev.date -%}
+  <time datetime="{{ ev.date }}">{{ ev.date | date: "%-d %B %Y" }}</time>{% if ev.end_date and ev.end_date != ev.date %} – <time datetime="{{ ev.end_date }}">{{ ev.end_date | date: "%-d %B %Y" }}</time>{% endif %}
+{%- elsif ev.month -%}{{ ev.month | append: '-01' | date: "%B %Y" }} · Date to be announced
+{%- else -%}Date to be confirmed
+{%- endif -%}

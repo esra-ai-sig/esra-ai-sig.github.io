@@ -1,0 +1,13 @@
+{%- assign ev = include.event -%}
+{%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- assign month = site.time | date: "%Y-%m" -%}
+{%- assign end = ev.end_date | default: ev.date -%}
+{%- if ev.status == 'pending' -%}Pending approval
+{%- elsif ev.date and end < today -%}Past
+{%- elsif ev.status == 'accepted' -%}Accepted session
+{%- elsif ev.date == today and end == today -%}Today
+{%- elsif ev.date and ev.date <= today and end >= today -%}In progress
+{%- elsif ev.date -%}Upcoming
+{%- elsif ev.month and ev.month < month -%}Awaiting an update
+{%- else -%}Announced
+{%- endif -%}

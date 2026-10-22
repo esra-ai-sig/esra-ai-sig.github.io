@@ -2,7 +2,7 @@
 layout: page
 title: Resources
 eyebrow: Resources
-heading: Curated resources on AI in survey research
+heading: Guidance & resources
 lede: Guidance, organisations, datasets and tools, and methods resources for AI in survey research.
 description: >-
   Curated resources on artificial intelligence in survey research — guidance and
@@ -21,7 +21,6 @@ sections:
 <section class="section">
   <div class="wrap">
     {%- assign all_resources = site.data.resources | sort: "date" | reverse -%}
-    {%- assign latest_resource = all_resources | first -%}
 
     <div class="filter-controls" data-filter-root>
       <label class="sr-only" for="resource-search">Search resources</label>
@@ -29,7 +28,7 @@ sections:
       <label class="sr-only" for="resource-section">Filter resources by section</label>
       <select id="resource-section" data-filter-type>
         <option value="">All sections</option>
-        {%- for sec in page.sections -%}<option value="{{ sec.id | escape }}">{{ sec.label | escape }}</option>{%- endfor -%}
+        {%- for sec in page.sections -%}{%- assign section_items = site.data.resources | where: "section", sec.id -%}{%- if section_items.size > 0 -%}<option value="{{ sec.id | escape }}">{{ sec.label | escape }}</option>{%- endif -%}{%- endfor -%}
       </select>
       <label class="sr-only" for="resource-year">Filter resources by year</label>
       <select id="resource-year" data-filter-year>
@@ -54,73 +53,17 @@ sections:
 
     <div class="list-head">
       <h2>Resource list</h2>
-      <span class="count" data-filter-count>{{ all_resources | size }} {% if all_resources.size == 1 %}entry{% else %}entries{% endif %}</span>
-      {%- if latest_resource and latest_resource.date and latest_resource.date != "" -%}
-      <span class="count">Last updated {{ latest_resource.date | date: "%-d %b %Y" }}</span>
-      {%- endif -%}
+      <span class="count" data-filter-count role="status" aria-live="polite">{{ all_resources | size }} {% if all_resources.size == 1 %}entry{% else %}entries{% endif %}</span>
     </div>
 
     {%- for sec in page.sections -%}
     {%- assign items = site.data.resources | where: "section", sec.id -%}
     {%- if items.size > 0 -%}
-    <div class="list-head section-block-head" data-filter-section-head style="margin-top:8px" data-section="{{ sec.id }}">
+    <div class="list-head section-block-head" data-filter-section-head data-section="{{ sec.id }}">
       <h2 id="{{ sec.id }}">{{ sec.label | escape }}</h2>
-      <span class="count">{{ items | size }} {% if items.size == 1 %}entry{% else %}entries{% endif %}</span>
+      <span class="count" data-section-count>{{ items | size }} entries</span>
     </div>
-    {%- if sec.id == "guidance" -%}
-    <dialog class="checklist-dialog" id="guide-llm-dialog" aria-labelledby="guide-llm-dialog-title">
-      <div class="checklist-dialog-bar">
-        <div>
-          <span class="tag resource">GUIDE-LLM</span>
-          <h3 id="guide-llm-dialog-title">Checklist preview</h3>
-        </div>
-        <button class="checklist-close" type="button" data-checklist-close aria-label="Close checklist preview">&times;</button>
-      </div>
-      <p class="checklist-dialog-note">This local preview summarizes the checklist structure. Use the Nature article and table for the authoritative version and answer options.</p>
-      <div class="checklist-grid">
-        <section>
-          <span>A</span>
-          <h4>Scope of LLM use</h4>
-          <p>Record where LLMs enter the project and how much human oversight is involved.</p>
-        </section>
-        <section>
-          <span>B</span>
-          <h4>Model or system details</h4>
-          <p>Capture the model identity, access route, configuration, customization, and memory behaviour.</p>
-        </section>
-        <section>
-          <span>C</span>
-          <h4>Prompts</h4>
-          <p>Provide the prompts and any wider instructions that shape model behaviour.</p>
-        </section>
-        <section>
-          <span>D</span>
-          <h4>Data inputs and privacy</h4>
-          <p>Document how personal or sensitive data are handled, including consent and processing safeguards.</p>
-        </section>
-        <section>
-          <span>E</span>
-          <h4>Validation and interpretation</h4>
-          <p>Describe human validation and any post-processing that changes or filters LLM outputs.</p>
-        </section>
-        <section>
-          <span>F</span>
-          <h4>Reproducibility</h4>
-          <p>Share code, notebooks, scripts, or structured call records where disclosure is feasible.</p>
-        </section>
-        <section>
-          <span>G</span>
-          <h4>Competing interests</h4>
-          <p>Disclose funding, compute access, provider relationships, and other relevant support.</p>
-        </section>
-      </div>
-      <div class="checklist-dialog-actions">
-        <a class="btn btn-primary" href="https://www.nature.com/articles/s41562-026-02492-7/tables/1" rel="noopener">Open checklist table</a>
-        <a class="btn btn-ghost" href="https://www.nature.com/articles/s41562-026-02492-7" rel="noopener">Read Nature article</a>
-      </div>
-    </dialog>
-    {%- endif -%}
-    <div class="item-list section-block-items" style="margin-bottom:48px" data-filter-scope="resources" data-section="{{ sec.id }}">
+    <div class="item-list section-block-items" data-filter-scope="resources" data-section="{{ sec.id }}">
       {%- for r in items -%}
       {%- assign resource_filter_year = r.year -%}
       {%- if resource_filter_year == nil or resource_filter_year == "" -%}
@@ -143,10 +86,9 @@ sections:
         <div class="i-aside">
           {%- if r.template -%}<span class="tag template">Template</span>{%- endif -%}
           {%- if r.checklist_link and r.checklist_link != "" -%}
-          <button class="checklist-link" type="button" data-checklist-open aria-haspopup="dialog" aria-controls="guide-llm-dialog">Preview checklist</button>
           <p class="i-link"><a href="{{ r.checklist_link }}" rel="noopener">Open checklist&nbsp;&rarr;</a></p>
           {%- endif -%}
-          {%- if r.link and r.link != "" -%}<p class="i-link"><a href="{{ r.link }}" rel="noopener">Open&nbsp;&rarr;</a></p>{%- endif -%}
+          {%- if r.link and r.link != "" -%}<p class="i-link"><a href="{{ r.link }}" rel="noopener">Read resource<span class="sr-only">: {{ r.title | escape }}</span></a></p>{%- endif -%}
         </div>
       </div>
       {%- endfor -%}
@@ -195,6 +137,8 @@ sections:
           heads.forEach(function (head) {
             if (head.getAttribute('data-section') === section) {
               head.hidden = !hasVisible;
+              var number = Array.from(scope.querySelectorAll("[data-filter-item]")).filter(item => !item.hidden).length;
+              head.querySelector("[data-section-count]").textContent = number + (number === 1 ? " entry" : " entries");
             }
           });
         });
@@ -216,50 +160,5 @@ sections:
       applyFilters();
     }
 
-    var dialog = document.getElementById('guide-llm-dialog');
-    if (!dialog) return;
-
-    var openers = document.querySelectorAll('[data-checklist-open]');
-    var closer = dialog.querySelector('[data-checklist-close]');
-    var activeOpener = null;
-
-    function closeDialog() {
-      if (typeof dialog.close === 'function' && dialog.open) {
-        dialog.close();
-      } else {
-        dialog.removeAttribute('open');
-      }
-      if (activeOpener && typeof activeOpener.focus === 'function') {
-        activeOpener.focus();
-      }
-    }
-
-    openers.forEach(function (opener) {
-      opener.addEventListener('click', function () {
-        activeOpener = opener;
-        if (typeof dialog.showModal === 'function') {
-          dialog.showModal();
-        } else {
-          dialog.setAttribute('open', '');
-        }
-      });
-    });
-
-    if (closer) {
-      closer.addEventListener('click', function () {
-        closeDialog();
-      });
-    }
-
-    dialog.addEventListener('click', function (event) {
-      if (event.target === dialog) {
-        closeDialog();
-      }
-    });
-    dialog.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeDialog();
-      }
-    });
   })();
 </script>

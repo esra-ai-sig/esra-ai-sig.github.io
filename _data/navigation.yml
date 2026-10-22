@@ -1,16 +1,10 @@
-# ============================================================
-# Site navigation — edit labels/order here; links use baseurl
-# automatically. `cta: true` styles the item as the pill button.
-# ============================================================
-- title: Home
-  url: /
-- title: About
-  url: /about/
-- title: Activities
+- title: Events
   url: /activities/
-- title: Resources
-  url: /resources/
 - title: Papers
   url: /papers/
-- title: Join
-  url: /join/
+- title: Workflows
+  url: /workflows/
+- title: Resources
+  url: /resources/
+- title: About
+  url: /about/

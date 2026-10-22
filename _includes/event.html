@@ -1,0 +1,13 @@
+{%- assign ev = include.event -%}
+{%- capture state -%}{%- include event-state.html event=ev -%}{%- endcapture -%}
+<article class="item event-entry" id="{{ ev.id }}">
+  <div class="i-main">
+    <p class="entry-label">{{ ev.kind | capitalize }} · {% if ev.affiliation == 'sig' %}SIG programme{% else %}Community event{% endif %} <span class="tag">{{ state }}</span></p>
+    <h3>{% if ev.link %}<a href="{{ ev.link | escape }}">{{ ev.title | escape }}</a>{% else %}{{ ev.title | escape }}{% endif %}</h3>
+    <p class="i-meta">{% include event-date.html event=ev %}{% if ev.time %}<br>{{ ev.time | escape }}{% endif %}<br>{{ ev.location | escape }}</p>
+    {% if ev.speaker %}<p class="i-meta">With {{ ev.speaker | escape }}</p>{% endif %}
+    {% if ev.organiser %}<p class="i-meta">{% if ev.kind == 'symposium' %}Coordinators{% else %}Organised by{% endif %}: {{ ev.organiser | escape }}</p>{% endif %}
+    <p>{{ ev.note | escape }}</p>
+    {% if ev.link %}<a class="text-link" href="{{ ev.link | escape }}">{% if ev.kind == 'course' and state != 'Past' %}Course details and booking{% elsif ev.kind == 'symposium' %}Read the session call{% elsif state == 'Past' %}Event information{% else %}Event details{% endif %}<span class="sr-only">: {{ ev.title | escape }}</span></a>{% endif %}
+  </div>
+</article>

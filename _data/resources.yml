@@ -39,3 +39,12 @@
   link: "https://www.nature.com/articles/s41562-026-02492-7"
   checklist_link: "https://www.nature.com/articles/s41562-026-02492-7/tables/1"
   note: "Introduces GUIDE-LLM, a consensus reporting checklist for transparency, reproducibility, and ethical accountability in behavioural and social science studies involving LLMs."
+
+- type: resource
+  section: organisations
+  title: "NCRM resources on AI in social research"
+  org: "National Centre for Research Methods"
+  date: "2026-10-22"
+  source: "Resource collection"
+  link: "https://repository.ncrm.ac.uk/resources/AI.php"
+  note: "Training, resources and ongoing initiatives on AI methods for social researchers."

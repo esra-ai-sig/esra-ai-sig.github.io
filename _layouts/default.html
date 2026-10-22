@@ -10,33 +10,6 @@
 {{ content }}
 </main>
 {% include footer.html %}
-<script>
-  // Mobile nav toggle + lightweight progressive enhancements.
-  (function () {
-    var t = document.querySelector('.nav-toggle');
-    var m = document.getElementById('primary-nav');
-    if (t && m) {
-      t.addEventListener('click', function () {
-        var open = m.classList.toggle('open');
-        t.setAttribute('aria-expanded', String(open));
-      });
-    }
-
-    var sameHost = window.location.host;
-    var links = document.querySelectorAll('a[href^="http"]');
-    links.forEach(function (link) {
-      var href = link.getAttribute('href');
-      if (!href) return;
-      var probe = document.createElement('a');
-      probe.href = href;
-      if (!probe.host || probe.host === sameHost) return;
-      link.classList.add('is-external');
-      var existing = link.getAttribute('aria-label') || link.textContent || '';
-      if (!/external/i.test(existing)) {
-        link.setAttribute('aria-label', existing.trim() + ' (external link)');
-      }
-    });
-  })();
-</script>
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
 </body>
 </html>

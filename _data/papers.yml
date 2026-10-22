@@ -1,22 +1,22 @@
-# ============================================================
-# PAPERS & PREPRINTS  (curated, manually maintained — do NOT scrape)
-# ------------------------------------------------------------
-# Chairs: add a paper by copying a block and editing it.
-#
-# Fields:
-#   type     : always "paper"   (drives the Latest feed + badge)
-#   title    : paper title
-#   authors  : "Surname, A., Surname, B."
-#   year     : publication / preprint year
-#   date     : YYYY-MM-DD  (used for ordering; "" for templates.
-#              If you only know the year, use YYYY-01-01.)
-#   venue    : journal, conference, or preprint server
-#   source   : optional source label (e.g., "Working paper", "Publisher page")
-#   doi      : optional DOI string (without https://doi.org/)
-#   tags     : optional comma-separated keywords for filtering
-#   kind     : optional label for badge (e.g., "paper", "preprint")
-#   link     : DOI / arXiv / publisher URL
-#   note     : one-line note on why it is relevant
-# ============================================================
-
-[]
+# kind: Published paper | Working paper | Preprint. Use the real publication date.
+- title: "SOCbot: Using Large Language Models to Dynamically Measure and Classify Occupations in Surveys"
+  authors: "Patrick Sturgis, Thomas S. Robinson, Laura Fung and Caroline Roberts"
+  year: 2026
+  date: "2026-06-29"
+  kind: "Published paper"
+  venue: "Sociological Methods & Research · OnlineFirst"
+  doi: "10.1177/00491241261461516"
+  link: "https://journals.sagepub.com/doi/10.1177/00491241261461516"
+  code: "https://github.com/PatrickSturgis/SOCbot"
+  tags: "Occupation coding, LLMs, dynamic probing"
+  note: "An LLM codes occupations during a survey and asks tailored follow-up questions when a job title is ambiguous. The paper evaluates the approach against human coding and in a live survey."
+- title: "Thematic analysis with open-source generative AI and machine learning: a new method for inductive qualitative codebook development"
+  authors: "Andrew Katz, Gabriella Coloyan Fleming and Joyce B. Main"
+  year: 2026
+  date: "2026-01-21"
+  kind: "Published paper"
+  venue: "Humanities and Social Sciences Communications · 13, 209"
+  doi: "10.1057/s41599-026-06508-5"
+  link: "https://www.nature.com/articles/s41599-026-06508-5"
+  tags: "Thematic analysis, codebooks, open-weights models"
+  note: "Introduces the GATOS workflow for inductive codebook development. Evaluation uses three synthetic datasets; its findings should not be read as establishing equivalence to human analysis of real survey responses."

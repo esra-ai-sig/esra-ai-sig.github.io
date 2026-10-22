@@ -1,184 +1,48 @@
 ---
 layout: page
-title: Activities
-eyebrow: Activities
-heading: Programme of webinars, symposia &amp; courses
-lede: The SIG runs four webinars, at least one symposium or panel, and one short course each year. Scheduled events and relevant calls are listed below.
-description: >-
-  The ESRA AI-SIG activities programme — webinars, symposia and panels, and short
-  courses on AI in survey research.
+title: Events
+heading: Events & training
+lede: SIG webinars, ESRA sessions, practical training and opportunities from the survey research community.
 ---
-
-<section class="section">
-  <div class="wrap">
-    <div class="cards">
-      <div class="card">
-        <div class="freq">4&times;</div>
-        <div class="cadence">per year</div>
-        <h3>Webinars</h3>
-        <p>Online talks on emerging methods, tools, and findings &mdash; open to the mailing list.</p>
-      </div>
-      <div class="card">
-        <div class="freq">1+&times;</div>
-        <div class="cadence">per year</div>
-        <h3>Symposia &amp; panels</h3>
-        <p>At least one session at ESRA or a related conference, bringing the community together in person.</p>
-      </div>
-      <div class="card">
-        <div class="freq">1&times;</div>
-        <div class="cadence">per year</div>
-        <h3>Short courses</h3>
-        <p>A hands-on course, online or hosted at a chair's institution or a conference.</p>
-      </div>
-    </div>
+<section class="section page-index"><div class="wrap">
+  <nav class="page-links" aria-label="Events on this page"><a href="#sig">SIG programme</a><a href="#training">Training & community events</a><a href="#calls">Calls & deadlines</a><a href="#archive">Past events</a></nav>
+  <p class="fine-note">Times are shown where confirmed. Check the organiser’s page for fees, availability and registration.</p>
+</div></section>
+<section class="section" id="sig"><div class="wrap">
+  <h2>SIG programme</h2>
+  <p>Join our webinars and meet the community at ESRA. The two accepted sessions are part of the <a href="https://www.europeansurveyresearch.org/conference/paris-2027/">joint ESRA/WAPOR conference in Paris, 19–23 July 2027</a>.</p>
+  <div class="item-list">
+    {% assign dated = site.data.events | where: 'affiliation', 'sig' | sort: 'programme_order' %}
+    {% for ev in dated %}{% capture state %}{% include event-state.html event=ev %}{% endcapture %}{% unless state == 'Past' %}{% include event.html event=ev %}{% endunless %}{% endfor %}
   </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    {%- assign events = site.data.events | sort: "date" -%}
-    {%- assign latest_event = events | last -%}
-    {%- assign today = site.time | date: "%Y-%m-%d" -%}
-    {%- assign upcoming_count = 0 -%}
-    {%- assign past_count = 0 -%}
-    {%- for ev in events -%}
-      {%- if ev.status == "upcoming" and ev.date >= today -%}
-        {%- assign upcoming_count = upcoming_count | plus: 1 -%}
-      {%- elsif ev.status != "upcoming" or ev.date < today -%}
-        {%- assign past_count = past_count | plus: 1 -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- assign opportunities = site.data.opportunities | sort: "date" | reverse -%}
-    <div class="list-head">
-      <h2>Upcoming events</h2>
-      <span class="count">{{ upcoming_count }} listed</span>
-      {%- if latest_event and latest_event.date and latest_event.date != "" -%}
-      <span class="count">Last updated {{ latest_event.date | date: "%-d %b %Y" }}</span>
-      {%- endif -%}
-    </div>
-    <p class="list-note">Event times and time zones are shown on each event page or registration link.</p>
-
-    <div class="item-list">
-      {%- if upcoming_count == 0 -%}
-      <p class="empty-note">No upcoming events are listed yet.</p>
-      {%- endif -%}
-      {%- for ev in events -%}
-      {%- if ev.status == "upcoming" and ev.date >= today -%}
-      <div class="item">
-        <div class="i-main">
-          <h3>
-            {%- if ev.link and ev.link != "" -%}<a href="{{ ev.link }}" rel="noopener">{{ ev.title }}</a>{%- else -%}{{ ev.title }}{%- endif -%}
-          </h3>
-          <p class="i-meta">
-            {{ ev.kind | capitalize }}{% if ev.location and ev.location != "" %} &middot; {{ ev.location }}{% endif %}{% if ev.date and ev.date != "" %} &middot; {{ ev.date | date: "%-d %B %Y" }}{% else %} &middot; date to be announced{% endif %}{% if ev.speaker and ev.speaker != "" %} &middot; {{ ev.speaker }}{% endif %}{% if ev.source and ev.source != "" %} &middot; {{ ev.source }}{% endif %}
-          </p>
-          {%- if ev.tags and ev.tags != "" -%}<p class="i-tags">{{ ev.tags }}</p>{%- endif -%}
-          {%- if ev.note and ev.note != "" -%}<p class="i-note">{{ ev.note }}</p>{%- endif -%}
-        </div>
-        <div class="i-aside">
-          <span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>
-        </div>
-      </div>
-      {%- endif -%}
-      {%- endfor -%}
-    </div>
+</div></section>
+<section class="section surface" id="training"><div class="wrap">
+  <h2>Training & community events</h2>
+  <p>External opportunities selected for their relevance to AI and survey research.</p>
+  <div class="item-list">
+    {% assign external = site.data.events | where: 'affiliation', 'external' | sort: 'date' %}
+    {% assign active_count = 0 %}
+    {% for ev in external %}{% capture state %}{% include event-state.html event=ev %}{% endcapture %}{% unless state == 'Past' %}{% include event.html event=ev %}{% assign active_count = active_count | plus: 1 %}{% endunless %}{% endfor %}
+    {% if active_count == 0 %}<p>No upcoming community events are listed. <a href="{{ '/join/#suggest' | relative_url }}">Suggest one</a>.</p>{% endif %}
   </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="list-head">
-      <h2>Calls and opportunities</h2>
-      <span class="count">{{ opportunities | size }} listed</span>
-    </div>
-    <div class="item-list">
-      {%- if opportunities.size == 0 -%}
-      <p class="empty-note">No calls or opportunities are listed yet.</p>
-      {%- endif -%}
-      {%- for op in opportunities -%}
-      <div class="item">
-        <div class="i-main">
-          <h3>
-            {%- if op.link and op.link != "" -%}<a href="{{ op.link }}" rel="noopener">{{ op.title }}</a>{%- else -%}{{ op.title }}{%- endif -%}
-          </h3>
-          <p class="i-meta">
-            {{ op.kind | capitalize }}{% if op.date and op.date != "" %} &middot; deadline {{ op.date | date: "%-d %B %Y" }}{% endif %}{% if op.source and op.source != "" %} &middot; {{ op.source }}{% endif %}
-          </p>
-          {%- if op.tags and op.tags != "" -%}<p class="i-tags">{{ op.tags }}</p>{%- endif -%}
-          {%- if op.note and op.note != "" -%}<p class="i-note">{{ op.note }}</p>{%- endif -%}
-        </div>
-        <div class="i-aside">
-          <span class="tag opportunity">{{ op.status | default: op.kind | capitalize }}</span>
-        </div>
-      </div>
-      {%- endfor -%}
-    </div>
+</div></section>
+<section class="section" id="calls"><div class="wrap">
+  <h2>Calls & deadlines</h2>
+  <div class="item-list">
+  {% assign today = site.time | date: '%Y-%m-%d' %}
+  {% assign calls = site.data.opportunities | sort: 'date' %}
+  {% for op in calls %}<article class="item"><div class="i-main">
+    <p class="entry-label">{{ op.kind | capitalize }} · {{ op.source }} <span class="tag">{% if op.date < today or op.status == 'closed' %}Closed{% else %}Open{% endif %}</span></p>
+    <h3><a href="{{ op.link | escape }}">{{ op.title | escape }}</a></h3>
+    <p class="i-meta">Deadline: <time datetime="{{ op.date }}">{{ op.date | date: '%-d %B %Y' }}</time></p><p>{{ op.note | escape }}</p>
+  </div></article>{% endfor %}
   </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="list-head">
-      <h2>Past events</h2>
-      <span class="count">{{ past_count }} listed</span>
-    </div>
-    <div class="item-list">
-      {%- if past_count == 0 -%}
-      <p class="empty-note">Past events will appear here after they run.</p>
-      {%- endif -%}
-      {%- assign events_desc = events | reverse -%}
-      {%- for ev in events_desc -%}
-      {%- if ev.status != "upcoming" or ev.date < today -%}
-      <div class="item">
-        <div class="i-main">
-          <h3>
-            {%- if ev.link and ev.link != "" -%}<a href="{{ ev.link }}" rel="noopener">{{ ev.title }}</a>{%- else -%}{{ ev.title }}{%- endif -%}
-          </h3>
-          <p class="i-meta">
-            {{ ev.kind | capitalize }}{% if ev.location and ev.location != "" %} &middot; {{ ev.location }}{% endif %}{% if ev.date and ev.date != "" %} &middot; {{ ev.date | date: "%-d %B %Y" }}{% else %} &middot; date to be announced{% endif %}{% if ev.speaker and ev.speaker != "" %} &middot; {{ ev.speaker }}{% endif %}{% if ev.source and ev.source != "" %} &middot; {{ ev.source }}{% endif %}
-          </p>
-          {%- if ev.tags and ev.tags != "" -%}<p class="i-tags">{{ ev.tags }}</p>{%- endif -%}
-          {%- if ev.note and ev.note != "" -%}<p class="i-note">{{ ev.note }}</p>{%- endif -%}
-        </div>
-        <div class="i-aside">
-          <span class="tag event">{{ ev.status | default: ev.kind | capitalize }}</span>
-        </div>
-      </div>
-      {%- endif -%}
-      {%- endfor -%}
-    </div>
+</div></section>
+<section class="section surface" id="archive"><div class="wrap">
+  <h2>Past events</h2>
+  <p>Earlier talks and training. Slides, recordings and code will be linked here when they are available.</p>
+  <div class="item-list">
+    {% assign archived = site.data.events | sort: 'date' | reverse %}
+    {% for ev in archived %}{% capture state %}{% include event-state.html event=ev %}{% endcapture %}{% if state == 'Past' %}{% include event.html event=ev %}{% endif %}{% endfor %}
   </div>
-</section>
-
-{%- if events.size > 0 -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {%- assign first_ld_event = true -%}
-    {%- for ev in events -%}
-    {%- if ev.link and ev.link != "" and ev.date and ev.date != "" -%}
-    {%- unless first_ld_event -%},{%- endunless -%}
-    {
-      "@type": "Event",
-      "name": {{ ev.title | jsonify }},
-      "startDate": {{ ev.date | jsonify }},
-      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-      "eventStatus": "https://schema.org/{% if ev.status == 'upcoming' %}EventScheduled{% else %}EventCompleted{% endif %}",
-      "location": {
-        "@type": "Place",
-        "name": {{ ev.location | default: "Online" | jsonify }}
-      },
-      "organizer": {
-        "@type": "Organization",
-        "name": "ESRA AI-SIG"
-      },
-      "url": {{ ev.link | jsonify }}
-    }
-    {%- assign first_ld_event = false -%}
-    {%- endif -%}
-    {%- endfor -%}
-  ]
-}
-</script>
-{%- endif -%}
+</div></section>
