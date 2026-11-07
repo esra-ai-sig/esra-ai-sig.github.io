@@ -1,0 +1,4 @@
+<div class="button-row">
+  <a class="btn btn-ghost" href="{{ include.event.calendar | relative_url }}" download>Add to calendar (.ics)<span class="sr-only">: {{ include.event.title | escape }}</span></a>
+  <a class="btn btn-ghost" href="{{ include.event.google_calendar | escape }}">Add to Google Calendar<span class="sr-only">: {{ include.event.title | escape }}</span></a>
+</div>

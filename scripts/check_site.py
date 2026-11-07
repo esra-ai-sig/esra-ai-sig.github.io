@@ -37,6 +37,7 @@ class Page(HTMLParser):
 
 paths = [root / 'index.html'] + [root / name / 'index.html' for name in
     ('about', 'activities', 'papers', 'resources', 'workflows', 'join')]
+paths += sorted((root / 'webinars').glob('*/index.html'))
 pages = {p: Page(p) for p in paths}
 for path, page in pages.items():
     assert page.h1 == 1, f'{path}: expected one h1, found {page.h1}'

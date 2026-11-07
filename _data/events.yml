@@ -13,16 +13,24 @@
   link: "https://www.ncrm.ac.uk/news/show.php?article=5884"
   note: "Launch of the ESRA AI Special Interest Group, alongside a talk on evaluating LLM coding using a Total Survey Error framework and discussion of AI in survey research."
   affiliation: sig
-- id: thematic-analysis-2026
+- id: "thematic-analysis-2026"
   programme_order: 2
-  kind: webinar
-  title: "Large-scale thematic analysis using LLMs"
-  month: "2026-11"
-  status: announced
-  organiser: "ESRA AI-SIG"
+  kind: "webinar"
+  title: "Text Analysis at Scale with Open Language Models: Workflows, Validation, and Practical Lessons"
+  date: "2026-11-18"
+  end_date: "2026-11-18"
+  time: "14:00–15:00 GMT (Europe/London)"
+  speaker: "Andrew Katz (Virginia Tech)"
+  organiser: "NCRM AI Survey Network / ESRA AI-SIG"
   location: "Online"
-  note: "Our November webinar will explore large-scale thematic analysis using large language models. The date, speakers and registration details will be announced through the mailing list."
-  affiliation: sig
+  link: "/webinars/2026-11-18-andrew-katz/"
+  note: "Andrew Katz (Virginia Tech) discusses workflows for large-scale text analysis with open-weights language models, including GATOS, validation and practical lessons."
+  joining: "Joining details to follow"
+  calendar: "/assets/calendar/andrew-katz-2026-11-18.ics"
+  google_calendar: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Text+Analysis+at+Scale+with+Open+Language+Models%3A+Workflows%2C+Validation%2C+and+Practical+Lessons&dates=20261118T140000Z%2F20261118T150000Z&ctz=Europe%2FLondon&details=Joint+NCRM%2FESRA+AI-SIG+webinar+with+Andrew+Katz.+Joining+details+to+follow.%0Ahttps%3A%2F%2Fesra-ai-sig.github.io%2Fwebinars%2F2026-11-18-andrew-katz%2F&location=Online+%E2%80%94+joining+details+to+follow"
+  abstract: "Large language models can seemingly now code and theme thousands of open-ended texts, but the harder questions are practical: how do we as researchers design workflows that hold up, and how do we know whether outputs of such workflows can be trusted? This talk draws on years of building such processes with open-weights language models running on local hardware, applied to text data ranging from interviews, student evaluations of teaching, social media posts, job advertisements, and university AI policies. I will introduce processes such as GATOS, a workflow for emulating aspects of inductive thematic analysis, and describe the logic behind algorithmic design decisions at a high level: breaking a large corpus into steps a model can handle, deciding what goes into each context window, and keeping every code linked to the passages it came from. I will then focus on analogs of validation and how researchers might think about such strategies in their own work."
+  bio: "Andrew Katz is an Associate Professor of Engineering Education and Assistant Department Head for Graduate Programs at Virginia Tech, where he directs the Improving Decisions in Engineering, Education, Agents, and Systems (IDEEAS) Lab. His research asks how people understand sociotechnical systems such as AI and how that understanding shapes their decisions. For his research, he also develops and validates methods for large-scale text analysis with open language models, including GATOS, a thematic analysis-like workflow released as the open-source Python package pygatos, and information-theoretic measures of saturation built from language model surprisal. Since 2019 his work has been supported by more than $2.5 million in external funding, including an NSF CAREER award, and has produced more than 80 publications. He holds a Ph.D. in Engineering Education from Purdue University."
+  affiliation: "sig"
 - id: agentic-coding-2026
   kind: course
   title: "Agentic Coding for Survey Research"
