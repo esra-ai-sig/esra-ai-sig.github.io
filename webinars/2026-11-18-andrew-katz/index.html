@@ -5,8 +5,9 @@ permalink: /webinars/2026-11-18-andrew-katz/
 description: Andrew Katz presents open language model workflows, validation and practical lessons at the NCRM/ESRA AI-SIG webinar on 18 November 2026, 14:00–15:00 GMT.
 ---
 {% assign webinar = site.data.events | where: 'id', 'thematic-analysis-2026' | first %}
-<section class="page-hero"><div class="wrap">
+<section class="page-hero webinar-hero"><div class="wrap">
   <p><a href="{{ '/activities/#thematic-analysis-2026' | relative_url }}">Events & training</a> · NCRM / ESRA AI-SIG webinar</p>
+  <img class="webinar-portrait" src="{{ "/assets/img/andrew-katz.jpg" | relative_url }}" alt="Andrew Katz" width="1732" height="1154" fetchpriority="high">
   <h1>{{ webinar.title | escape }}</h1>
   <p class="lede">{{ webinar.speaker | escape }}</p>
   <p><time datetime="2026-11-18T14:00:00Z">Wednesday 18 November 2026</time> · {{ webinar.time | escape }} · Online</p>
@@ -16,6 +17,7 @@ description: Andrew Katz presents open language model workflows, validation and 
 <section class="section"><div class="wrap"><div class="prose">
   <h2>About the talk</h2><p>{{ webinar.abstract | escape }}</p>
   <h2>About Andrew Katz</h2><p>{{ webinar.bio | escape }}</p>
+  <p class="i-meta">Photo: <a href="https://enge.vt.edu/People/researchfaculty/andrewkatz.html">Virginia Tech faculty profile</a>.</p>
   <p>Organised by {{ webinar.organiser | escape }}.</p>
   <p><a href="{{ site.mailing_list_url | escape }}">Join the mailing list</a> for webinar updates and joining details.</p>
 </div></div></section>

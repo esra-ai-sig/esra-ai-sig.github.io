@@ -24,7 +24,7 @@ class Page(HTMLParser):
         if tag in ('script', 'img', 'link'):
             value = a.get('src') if tag != 'link' else a.get('href')
             if value and not value.startswith(('http', 'data:')):
-                assert (root / value.lstrip('/')).is_file(), f'{self.path}: missing asset {value}'
+                assert (root / unquote(urlsplit(value).path).lstrip('/')).is_file(), f'{self.path}: missing asset {value}'
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.json = ''
     def handle_data(self, data):

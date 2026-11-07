@@ -140,3 +140,26 @@ footer.site { padding-block: 3rem 1.5rem; border-block-start: 1px solid var(--li
 .event-entry { grid-template-columns: 1fr; }
 
 .section.page-index { padding-block: 1.5rem; }
+
+/* Speaker portrait: let the seminar heading flow around the photograph. */
+.webinar-hero .wrap { display: flow-root; }
+.webinar-portrait {
+  float: inline-end;
+  inline-size: clamp(15rem, 28vw, 20rem);
+  block-size: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-inline-start: 2rem;
+  margin-block: .25rem 1.5rem;
+}
+.webinar-hero h1 { max-inline-size: none; text-wrap: wrap; }
+@media (width < 45rem) {
+  .webinar-portrait {
+    float: none;
+    display: block;
+    inline-size: min(65%, 16rem);
+    margin-inline: 0;
+    margin-block: 1.5rem;
+  }
+}
