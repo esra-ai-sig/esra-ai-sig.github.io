@@ -10,7 +10,7 @@
     {% if ev.speaker %}<p class="i-meta">With {{ ev.speaker | escape }}</p>{% endif %}
     {% if ev.organiser %}<p class="i-meta">{% if ev.kind == 'symposium' %}Coordinators{% else %}Organised by{% endif %}: {{ ev.organiser | escape }}</p>{% endif %}
     <p>{{ ev.note | escape }}</p>
-    {% if ev.joining %}<p><strong>{{ ev.joining | escape }}</strong></p>{% endif %}
+    {% if ev.joining %}{% include webinar-joining.html event=ev %}{% endif %}
     {% if ev.link %}<a class="text-link" href="{{ event_link | escape }}">{% if ev.kind == 'course' and state != 'Past' %}Course details and booking{% elsif ev.kind == 'symposium' %}Read the session call{% elsif state == 'Past' %}Event information{% else %}Event details{% endif %}<span class="sr-only">: {{ ev.title | escape }}</span></a>{% endif %}
     {% if ev.calendar %}{% include webinar-calendar.html event=ev %}{% endif %}
   </div>

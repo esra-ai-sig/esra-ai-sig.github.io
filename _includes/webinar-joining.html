@@ -1,0 +1,2 @@
+<p><strong>{% if include.event.join_url %}<a href="{{ include.event.join_url | escape }}">{{ include.event.joining | escape }}</a>{% else %}{{ include.event.joining | escape }}{% endif %}</strong></p>
+{% if include.event.meeting_id %}<p class="i-meta">Meeting ID: {{ include.event.meeting_id | escape }}<br>Passcode: {{ include.event.passcode | escape }}</p>{% endif %}

@@ -11,7 +11,7 @@ description: Andrew Katz presents open language model workflows, validation and 
   <h1>{{ webinar.title | escape }}</h1>
   <p class="lede">{{ webinar.speaker | escape }}</p>
   <p><time datetime="2026-11-18T14:00:00Z">Wednesday 18 November 2026</time> · {{ webinar.time | escape }} · Online</p>
-  <p><strong>{{ webinar.joining | escape }}</strong></p>
+  {% include webinar-joining.html event=webinar %}
   {% include webinar-calendar.html event=webinar %}
 </div></section>
 <section class="section"><div class="wrap"><div class="prose">

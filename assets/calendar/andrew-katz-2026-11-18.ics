@@ -5,17 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:andrew-katz-20261118@esra-ai-sig.github.io
-DTSTAMP:20261107T073315Z
+DTSTAMP:20261107T102909Z
+SEQUENCE:1
 DTSTART:20261118T140000Z
 DTEND:20261118T150000Z
 SUMMARY:Text Analysis at Scale with Open Language Models: Workflows\, Valid
  ation\, and Practical Lessons
 DESCRIPTION:Joint NCRM/ESRA AI-SIG webinar with Andrew Katz (Virginia Tech)
- . Andrew Katz (Virginia Tech) discusses workflows for large-scale text ana
- lysis with open-weights language models\, including GATOS\, validation and
-  practical lessons.\nJoining details to follow.\nhttps://esra-ai-sig.githu
- b.io/webinars/2026-11-18-andrew-katz/
-LOCATION:Online — joining details to follow
+ .\n\nJoin Microsoft Teams: https://teams.microsoft.com/meet/31960425454585
+ 2?p=bPxT8BWRshTpJ4aIVD\nMeeting ID: 319 604 254 545 852\nPasscode: Lq9eV7D
+ M\n\nTalk details: https://esra-ai-sig.github.io/webinars/2026-11-18-andre
+ w-katz/
+LOCATION:Microsoft Teams — https://teams.microsoft.com/meet/3196042545458
+ 52?p=bPxT8BWRshTpJ4aIVD
 URL:https://esra-ai-sig.github.io/webinars/2026-11-18-andrew-katz/
 STATUS:CONFIRMED
 TRANSP:OPAQUE

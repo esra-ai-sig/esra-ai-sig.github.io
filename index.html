@@ -26,7 +26,7 @@ title: Home
 </div></section>
 <section class="section"><div class="wrap feature-grid">
   {% assign webinar = site.data.events | where: 'id', 'thematic-analysis-2026' | first %}
-  <div><h2>Our November webinar</h2><h3><a href="{{ webinar.link | relative_url }}">{{ webinar.title | escape }}</a></h3><p><strong>Andrew Katz · Wednesday 18 November 2026 · 14:00–15:00 GMT</strong></p><p>{{ webinar.note | escape }}</p><p>{{ webinar.joining | escape }}</p><a class="text-link" href="{{ webinar.link | relative_url }}">Talk details & calendar links</a></div>
+  <div><h2>Our November webinar</h2><h3><a href="{{ webinar.link | relative_url }}">{{ webinar.title | escape }}</a></h3><p><strong>Andrew Katz · Wednesday 18 November 2026 · 14:00–15:00 GMT</strong></p><p>{{ webinar.note | escape }}</p>{% include webinar-joining.html event=webinar %}<a class="text-link" href="{{ webinar.link | relative_url }}">Talk details & calendar links</a></div>
   <div><h2>Meet us at ESRA 2027</h2><p>Two accepted sessions in Paris: LLM coding of open-ended text, and generative AI for making survey data easier to use. Our proposed training session is awaiting approval.</p><a class="text-link" href="{{ '/activities/#sig' | relative_url }}">Explore the ESRA sessions</a></div>
 </div></section>
 <section class="section surface"><div class="wrap feature-grid">
